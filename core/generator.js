@@ -67,9 +67,9 @@ Blockly.Generator.prototype.STATEMENT_PREFIX = null;
  * Generate code for all blocks in the workspace to the specified language.
  * @return {string} Generated code.
  */
-Blockly.Generator.prototype.workspaceToCode = function() {
+Blockly.Generator.prototype.workspaceToCode = function(options) {
   var code = [];
-  this.init();
+  this.init(options);
   var blocks = Blockly.mainWorkspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
     var line = this.blockToCode(block);
@@ -95,6 +95,14 @@ Blockly.Generator.prototype.workspaceToCode = function() {
   code = code.replace(/[ \t]+\n/g, '\n');
   return code;
 };
+
+Blockly.Generator.prototype.workspaceToMappedCode = function(options) {
+  if (options === undefined) {
+    options = Object.create(null);
+  }
+  options.mapblocks = true;
+  return this.workspaceToCode(options);
+}
 
 // The following are some helpful functions which can be used by multiple
 // languages.

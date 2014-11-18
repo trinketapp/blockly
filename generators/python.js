@@ -82,7 +82,11 @@ Blockly.Python.ORDER_NONE = 99;             // (...)
 /**
  * Initialise the database of variable names.
  */
-Blockly.Python.init = function() {
+Blockly.Python.init = function(options) {
+  if (options === undefined) {
+    options = Object.create(null);
+  }
+
   // Create a dictionary of definitions to be printed before the code.
   Blockly.Python.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
@@ -102,7 +106,13 @@ Blockly.Python.init = function() {
     defvars[x] = Blockly.Python.variableDB_.getName(variables[x],
         Blockly.Variables.NAME_TYPE) + ' = None';
   }
-  Blockly.Python.definitions_['variables'] = defvars.join('\n');
+
+  var initvars = typeof(options.initvars) === 'undefined' ? true : options.initvars;
+  if (initvars) {
+    Blockly.Python.definitions_['variables'] = defvars.join('\n');
+  }
+
+  Blockly.Python.mapblocks = options.mapblocks || false;
 };
 
 /**
@@ -183,7 +193,11 @@ Blockly.Python.scrub_ = function(block, code) {
       }
     }
   }
+  code = commentCode + code;
+  if (this.mapblocks) {
+    code = '/** ' + block.id + ' **/' + code + '/** end ' + block.id + ' **/';
+  }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   var nextCode = Blockly.Python.blockToCode(nextBlock);
-  return commentCode + code + nextCode;
+  return code + nextCode;
 };
