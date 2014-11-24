@@ -195,6 +195,13 @@ Blockly.Python.scrub_ = function(block, code) {
   }
   code = commentCode + code;
   if (this.mapblocks) {
+    var lines = code.split('\n');
+    var lastline = lines[lines.length - 1];
+    if (/^  \//.test(lastline)) {
+      lastline = lastline.substring(2, lastline.length);
+      lines[lines.length - 1] = lastline;
+    }
+    code = lines.join('\n');
     code = '/** ' + block.id + ' **/' + code + '/** end ' + block.id + ' **/';
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
