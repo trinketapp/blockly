@@ -31,7 +31,7 @@ goog.require('Blockly.Generator');
 
 /**
  * Python code generator.
- * @type !Blockly.Generator
+ * @type {!Blockly.Generator}
  */
 Blockly.Python = new Blockly.Generator('Python');
 
@@ -80,13 +80,15 @@ Blockly.Python.ORDER_LAMBDA = 16;           // lambda
 Blockly.Python.ORDER_NONE = 99;             // (...)
 
 /**
- * Initialise the database of variable names.
+ * Empty loops or conditionals are not allowed in Python.
  */
-Blockly.Python.init = function(options) {
-  if (options === undefined) {
-    options = Object.create(null);
-  }
+Blockly.Python.PASS = '  pass\n';
 
+/**
+ * Initialise the database of variable names.
+ * @param {!Blockly.Workspace} workspace Workspace to generate code from.
+ */
+Blockly.Python.init = function(workspace) {
   // Create a dictionary of definitions to be printed before the code.
   Blockly.Python.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
@@ -101,9 +103,9 @@ Blockly.Python.init = function(options) {
   }
 
   var defvars = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    defvars[x] = Blockly.Python.variableDB_.getName(variables[x],
+  var variables = Blockly.Variables.allVariables(workspace);
+  for (var i = 0; i < variables.length; i++) {
+    defvars[i] = Blockly.Python.variableDB_.getName(variables[i],
         Blockly.Variables.NAME_TYPE) + ' = None';
   }
 
@@ -132,6 +134,10 @@ Blockly.Python.finish = function(code) {
       definitions.push(def);
     }
   }
+  // Clean up temporary data.
+  delete Blockly.Python.definitions_;
+  delete Blockly.Python.functionNames_;
+  Blockly.Python.variableDB_.reset();
   var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };

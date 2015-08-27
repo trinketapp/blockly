@@ -27,7 +27,7 @@
 goog.provide('Blockly.Connection');
 goog.provide('Blockly.ConnectionDB');
 
-goog.require('Blockly.Workspace');
+goog.require('goog.dom');
 
 
 /**
@@ -37,14 +37,18 @@ goog.require('Blockly.Workspace');
  * @constructor
  */
 Blockly.Connection = function(source, type) {
+  /** @type {!Blockly.Block} */
   this.sourceBlock_ = source;
+  /** @type {Blockly.Connection} */
   this.targetConnection = null;
+  /** @type {number} */
   this.type = type;
   this.x_ = 0;
   this.y_ = 0;
-  this.inDB_ = false;
   // Shortcut for the databases for this connection's workspace.
-  this.dbList_ = this.sourceBlock_.workspace.connectionDBList;
+  this.dbList_ = source.workspace.connectionDBList;
+  this.hidden_ = !this.dbList_;
+  this.inDB_ = false;
 };
 
 /**
@@ -57,7 +61,6 @@ Blockly.Connection.prototype.dispose = function() {
   if (this.inDB_) {
     this.dbList_[this.type].removeConnection_(this);
   }
-  this.inDB_ = false;
   if (Blockly.highlightedConnection_ == this) {
     Blockly.highlightedConnection_ = null;
   }
@@ -117,7 +120,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       }
       if (orphanBlock) {
         // Unable to reattach orphan.  Bump it off to the side.
-        window.setTimeout(function() {
+        setTimeout(function() {
               orphanBlock.outputConnection.bumpAwayFrom_(otherConnection);
             }, Blockly.BUMP_DELAY);
       }
@@ -153,7 +156,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       }
       if (orphanBlock) {
         // Unable to reattach orphan.  Bump it off to the side.
-        window.setTimeout(function() {
+        setTimeout(function() {
               orphanBlock.previousConnection.bumpAwayFrom_(otherConnection);
             }, Blockly.BUMP_DELAY);
       }
@@ -180,10 +183,10 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   childBlock.setParent(parentBlock);
 
   if (parentBlock.rendered) {
-    parentBlock.svg_.updateDisabled();
+    parentBlock.updateDisabled();
   }
   if (childBlock.rendered) {
-    childBlock.svg_.updateDisabled();
+    childBlock.updateDisabled();
   }
   if (parentBlock.rendered && childBlock.rendered) {
     if (this.type == Blockly.NEXT_STATEMENT ||
@@ -251,7 +254,7 @@ Blockly.Connection.prototype.disconnect = function() {
     parentBlock.render();
   }
   if (childBlock.rendered) {
-    childBlock.svg_.updateDisabled();
+    childBlock.updateDisabled();
     childBlock.render();
   }
 };
@@ -275,7 +278,7 @@ Blockly.Connection.prototype.targetBlock = function() {
  * @private
  */
 Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
-  if (Blockly.Block.dragMode_ != 0) {
+  if (Blockly.dragMode_ != 0) {
     // Don't move blocks around while the user is doing the same.
     return;
   }
@@ -305,7 +308,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
     // When reversing a bump due to an uneditable block, bump up.
     dy = -dy;
   }
-  if (Blockly.RTL) {
+  if (rootBlock.RTL) {
     dx = -dx;
   }
   rootBlock.moveBy(dx, dy);
@@ -324,7 +327,9 @@ Blockly.Connection.prototype.moveTo = function(x, y) {
   this.x_ = x;
   this.y_ = y;
   // Insert it into its new location in the database.
-  this.dbList_[this.type].addConnection_(this);
+  if (!this.hidden_) {
+    this.dbList_[this.type].addConnection_(this);
+  }
 };
 
 /**
@@ -342,15 +347,15 @@ Blockly.Connection.prototype.moveBy = function(dx, dy) {
 Blockly.Connection.prototype.highlight = function() {
   var steps;
   if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.OUTPUT_VALUE) {
-    var tabWidth = Blockly.RTL ? -Blockly.BlockSvg.TAB_WIDTH :
-                                 Blockly.BlockSvg.TAB_WIDTH;
+    var tabWidth = this.sourceBlock_.RTL ? -Blockly.BlockSvg.TAB_WIDTH :
+        Blockly.BlockSvg.TAB_WIDTH;
     steps = 'm 0,0 v 5 c 0,10 ' + -tabWidth + ',-8 ' + -tabWidth + ',7.5 s ' +
             tabWidth + ',-2.5 ' + tabWidth + ',7.5 v 5';
   } else {
-    if (Blockly.RTL) {
-      steps = 'm 20,0 h -5 l -6,4 -3,0 -6,-4 h -5';
+    if (this.sourceBlock_.RTL) {
+      steps = 'm 20,0 h -5 ' + Blockly.BlockSvg.NOTCH_PATH_RIGHT + ' h -5';
     } else {
-      steps = 'm -20,0 h 5 l 6,4 3,0 6,-4 h 5';
+      steps = 'm -20,0 h 5 ' + Blockly.BlockSvg.NOTCH_PATH_LEFT + ' h 5';
     }
   }
   var xy = this.sourceBlock_.getRelativeToSurfaceXY();
@@ -359,7 +364,7 @@ Blockly.Connection.prototype.highlight = function() {
   Blockly.Connection.highlightedPath_ = Blockly.createSvgElement('path',
       {'class': 'blocklyHighlightedConnectionPath',
        'd': steps,
-       transform: 'translate(' + x + ', ' + y + ')'},
+       transform: 'translate(' + x + ',' + y + ')'},
       this.sourceBlock_.getSvgRoot());
 };
 
@@ -376,8 +381,8 @@ Blockly.Connection.prototype.unhighlight = function() {
  * @private
  */
 Blockly.Connection.prototype.tighten_ = function() {
-  var dx = Math.round(this.targetConnection.x_ - this.x_);
-  var dy = Math.round(this.targetConnection.y_ - this.y_);
+  var dx = this.targetConnection.x_ - this.x_;
+  var dy = this.targetConnection.y_ - this.y_;
   if (dx != 0 || dy != 0) {
     var block = this.targetBlock();
     var svgRoot = block.getSvgRoot();
@@ -386,7 +391,7 @@ Blockly.Connection.prototype.tighten_ = function() {
     }
     var xy = Blockly.getRelativeXY_(svgRoot);
     block.getSvgRoot().setAttribute('transform',
-        'translate(' + (xy.x - dx) + ', ' + (xy.y - dy) + ')');
+        'translate(' + (xy.x - dx) + ',' + (xy.y - dy) + ')');
     block.moveConnections_(-dx, -dy);
   }
 };
@@ -510,6 +515,17 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
  * @private
  */
 Blockly.Connection.prototype.checkType_ = function(otherConnection) {
+  // Don't split a connection where both sides are immovable.
+  var thisTargetBlock = this.targetBlock();
+  if (thisTargetBlock && !thisTargetBlock.isMovable() &&
+      !this.sourceBlock_.isMovable()) {
+    return false;
+  }
+  var otherTargetBlock = otherConnection.targetBlock();
+  if (otherTargetBlock && !otherTargetBlock.isMovable() &&
+      !otherConnection.sourceBlock_.isMovable()) {
+    return false;
+  }
   if (!this.check_ || !otherConnection.check_) {
     // One or both sides are promiscuous enough that anything will fit.
     return true;
@@ -617,14 +633,25 @@ Blockly.Connection.prototype.neighbours_ = function(maxLimit) {
 };
 
 /**
+ * Set whether this connections is hidden (not tracked in a database) or not.
+ * @param {boolean} hidden True if connection is hidden.
+ */
+Blockly.Connection.prototype.setHidden = function(hidden) {
+  this.hidden_ = hidden;
+  if (hidden && this.inDB_) {
+    this.dbList_[this.type].removeConnection_(this);
+  } else if (!hidden && !this.inDB_) {
+    this.dbList_[this.type].addConnection_(this);
+  }
+};
+
+/**
  * Hide this connection, as well as all down-stream connections on any block
  * attached to this connection.  This happens when a block is collapsed.
  * Also hides down-stream comments.
  */
 Blockly.Connection.prototype.hideAll = function() {
-  if (this.inDB_) {
-    this.dbList_[this.type].removeConnection_(this);
-  }
+  this.setHidden(true);
   if (this.targetConnection) {
     var blocks = this.targetBlock().getDescendants();
     for (var b = 0; b < blocks.length; b++) {
@@ -632,10 +659,7 @@ Blockly.Connection.prototype.hideAll = function() {
       // Hide all connections of all children.
       var connections = block.getConnections_(true);
       for (var c = 0; c < connections.length; c++) {
-        var connection = connections[c];
-        if (connection.inDB_) {
-          this.dbList_[connection.type].removeConnection_(connection);
-        }
+        connections[c].setHidden(true);
       }
       // Close all bubbles of all children.
       var icons = block.getIcons();
@@ -653,9 +677,7 @@ Blockly.Connection.prototype.hideAll = function() {
  * @return {!Array.<!Blockly.Block>} List of blocks to render.
  */
 Blockly.Connection.prototype.unhideAll = function() {
-  if (!this.inDB_) {
-    this.dbList_[this.type].addConnection_(this);
-  }
+  this.setHidden(false);
   // All blocks that need unhiding must be unhidden before any rendering takes
   // place, since rendering requires knowing the dimensions of lower blocks.
   // Also, since rendering a block renders all its parents, we only need to
@@ -714,6 +736,10 @@ Blockly.ConnectionDB.constructor = Blockly.ConnectionDB;
 Blockly.ConnectionDB.prototype.addConnection_ = function(connection) {
   if (connection.inDB_) {
     throw 'Connection already in database.';
+  }
+  if (connection.sourceBlock_.isInFlyout) {
+    // Don't bother maintaining a database of connections in a flyout.
+    return;
   }
   // Insert connection using binary search.
   var pointerMin = 0;

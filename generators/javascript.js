@@ -31,7 +31,7 @@ goog.require('Blockly.Generator');
 
 /**
  * JavaScript code generator.
- * @type !Blockly.Generator
+ * @type {!Blockly.Generator}
  */
 Blockly.JavaScript = new Blockly.Generator('JavaScript');
 
@@ -105,8 +105,9 @@ Blockly.JavaScript.ORDER_NONE = 99;          // (...)
 
 /**
  * Initialise the database of variable names.
+ * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
-Blockly.JavaScript.init = function() {
+Blockly.JavaScript.init = function(workspace) {
   // Create a dictionary of definitions to be printed before the code.
   Blockly.JavaScript.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
@@ -121,10 +122,10 @@ Blockly.JavaScript.init = function() {
   }
 
   var defvars = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    defvars[x] = 'var ' +
-        Blockly.JavaScript.variableDB_.getName(variables[x],
+  var variables = Blockly.Variables.allVariables(workspace);
+  for (var i = 0; i < variables.length; i++) {
+    defvars[i] = 'var ' +
+        Blockly.JavaScript.variableDB_.getName(variables[i],
         Blockly.Variables.NAME_TYPE) + ';';
   }
   Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');
@@ -141,6 +142,10 @@ Blockly.JavaScript.finish = function(code) {
   for (var name in Blockly.JavaScript.definitions_) {
     definitions.push(Blockly.JavaScript.definitions_[name]);
   }
+  // Clean up temporary data.
+  delete Blockly.JavaScript.definitions_;
+  delete Blockly.JavaScript.functionNames_;
+  Blockly.JavaScript.variableDB_.reset();
   return definitions.join('\n\n') + '\n\n\n' + code;
 };
 
