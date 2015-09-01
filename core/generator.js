@@ -103,14 +103,6 @@ Blockly.Generator.prototype.workspaceToCode = function(workspace) {
   return code;
 };
 
-Blockly.Generator.prototype.workspaceToMappedCode = function(options) {
-  if (options === undefined) {
-    options = Object.create(null);
-  }
-  options.mapblocks = true;
-  return this.workspaceToCode(options);
-}
-
 // The following are some helpful functions which can be used by multiple
 // languages.
 
