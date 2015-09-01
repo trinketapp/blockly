@@ -109,12 +109,9 @@ Blockly.Python.init = function(workspace) {
         Blockly.Variables.NAME_TYPE) + ' = None';
   }
 
-  var initvars = typeof(options.initvars) === 'undefined' ? true : options.initvars;
-  if (initvars) {
+  if (!Blockly.Python.disableInitVariables_) {
     Blockly.Python.definitions_['variables'] = defvars.join('\n');
   }
-
-  Blockly.Python.mapblocks = options.mapblocks || false;
 };
 
 /**
@@ -200,7 +197,7 @@ Blockly.Python.scrub_ = function(block, code) {
     }
   }
   code = commentCode + code;
-  if (this.mapblocks) {
+  if (Blockly.Python.mapBlocks_) {
     var lines = code.split('\n');
     var lastline = lines[lines.length - 1];
     if (/^  \//.test(lastline)) {
