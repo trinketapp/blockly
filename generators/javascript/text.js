@@ -24,7 +24,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.text');
+goog.provide('Blockly.JavaScript.texts');
 
 goog.require('Blockly.JavaScript');
 
@@ -216,8 +216,8 @@ Blockly.JavaScript['text_changeCase'] = function(block) {
 Blockly.JavaScript['text_trim'] = function(block) {
   // Trim spaces.
   var OPERATORS = {
-    'LEFT': '.trimLeft()',
-    'RIGHT': '.trimRight()',
+    'LEFT': ".replace(/^[\\s\\xa0]+/, '')",
+    'RIGHT': ".replace(/[\\s\\xa0]+$/, '')",
     'BOTH': '.trim()'
   };
   var operator = OPERATORS[block.getFieldValue('MODE')];
@@ -233,9 +233,16 @@ Blockly.JavaScript['text_print'] = function(block) {
   return 'window.alert(' + argument0 + ');\n';
 };
 
-Blockly.JavaScript['text_prompt'] = function(block) {
-  // Prompt function (internal message).
-  var msg = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
+Blockly.JavaScript['text_prompt_ext'] = function(block) {
+  // Prompt function.
+  if (block.getField('TEXT')) {
+    // Internal message.
+    var msg = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
+  } else {
+    // External message.
+    var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+        Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  }
   var code = 'window.prompt(' + msg + ')';
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
   if (toNumber) {
@@ -244,14 +251,4 @@ Blockly.JavaScript['text_prompt'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['text_prompt_ext'] = function(block) {
-  // Prompt function (external message).
-  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  var code = 'window.prompt(' + msg + ')';
-  var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
-  if (toNumber) {
-    code = 'parseFloat(' + code + ')';
-  }
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};
+Blockly.JavaScript['text_prompt'] = Blockly.JavaScript['text_prompt_ext'];

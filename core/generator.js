@@ -28,6 +28,7 @@
 goog.provide('Blockly.Generator');
 
 goog.require('Blockly.Block');
+goog.require('goog.asserts');
 
 
 /**
@@ -51,7 +52,7 @@ Blockly.Generator.NAME_TYPE = 'generated_function';
  * Arbitrary code to inject into locations that risk causing infinite loops.
  * Any instances of '%1' will be replaced by the block ID that failed.
  * E.g. '  checkTimeout(%1);\n'
- * @type ?string
+ * @type {?string}
  */
 Blockly.Generator.prototype.INFINITE_LOOP_TRAP = null;
 
@@ -59,18 +60,24 @@ Blockly.Generator.prototype.INFINITE_LOOP_TRAP = null;
  * Arbitrary code to inject before every statement.
  * Any instances of '%1' will be replaced by the block ID of the statement.
  * E.g. 'highlight(%1);\n'
- * @type ?string
+ * @type {?string}
  */
 Blockly.Generator.prototype.STATEMENT_PREFIX = null;
 
 /**
  * Generate code for all blocks in the workspace to the specified language.
+ * @param {Blockly.Workspace} workspace Workspace to generate code from.
  * @return {string} Generated code.
  */
-Blockly.Generator.prototype.workspaceToCode = function(options) {
+Blockly.Generator.prototype.workspaceToCode = function(workspace) {
+  if (!workspace) {
+    // Backwards compatability from before there could be multiple workspaces.
+    console.warn('No workspace specified in workspaceToCode call.  Guessing.');
+    workspace = Blockly.getMainWorkspace();
+  }
   var code = [];
-  this.init(options);
-  var blocks = Blockly.mainWorkspace.getTopBlocks(true);
+  this.init(workspace);
+  var blocks = workspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
     var line = this.blockToCode(block);
     if (goog.isArray(line)) {
@@ -95,14 +102,6 @@ Blockly.Generator.prototype.workspaceToCode = function(options) {
   code = code.replace(/[ \t]+\n/g, '\n');
   return code;
 };
-
-Blockly.Generator.prototype.workspaceToMappedCode = function(options) {
-  if (options === undefined) {
-    options = Object.create(null);
-  }
-  options.mapblocks = true;
-  return this.workspaceToCode(options);
-}
 
 // The following are some helpful functions which can be used by multiple
 // languages.
@@ -155,10 +154,9 @@ Blockly.Generator.prototype.blockToCode = function(block) {
   }
 
   var func = this[block.type];
-  if (!func) {
-    throw 'Language "' + this.name_ + '" does not know how to generate code ' +
-        'for block type "' + block.type + '".';
-  }
+  goog.asserts.assertFunction(func,
+      'Language "%s" does not know how to generate code for block type "%s".',
+      this.name_, block.type);
   // First argument to func.call is the value of 'this' in the generator.
   // Prior to 24 September 2013 'this' was the only way to access the block.
   // The current prefered method of accessing the block is through the second
@@ -177,7 +175,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
     // Block has handled code generation itself.
     return '';
   } else {
-    throw 'Invalid code generated: ' + code;
+    goog.asserts.fail('Invalid code generated: %s', code);
   }
 };
 
@@ -192,7 +190,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
  */
 Blockly.Generator.prototype.valueToCode = function(block, name, order) {
   if (isNaN(order)) {
-    throw 'Expecting valid order from block "' + block.type + '".';
+    goog.asserts.fail('Expecting valid order from block "%s".', block.type);
   }
   var targetBlock = block.getInputTargetBlock(name);
   if (!targetBlock) {
@@ -203,18 +201,19 @@ Blockly.Generator.prototype.valueToCode = function(block, name, order) {
     // Disabled block.
     return '';
   }
-  if (!goog.isArray(tuple)) {
-    // Value blocks must return code and order of operations info.
-    // Statement blocks must only return code.
-    throw 'Expecting tuple from value block "' + targetBlock.type + '".';
-  }
+  // Value blocks must return code and order of operations info.
+  // Statement blocks must only return code.
+  goog.asserts.assertArray(tuple,
+      'Expecting tuple from value block "%s".', targetBlock.type);
   var code = tuple[0];
   var innerOrder = tuple[1];
   if (isNaN(innerOrder)) {
-    throw 'Expecting valid order from value block "' + targetBlock.type + '".';
+    goog.asserts.fail('Expecting valid order from value block "%s".',
+        targetBlock.type);
   }
   if (code && order <= innerOrder) {
-    if (order == innerOrder || (order == 0 || order == 99)) {
+    if (order == innerOrder && (order == 0 || order == 99)) {
+      // Don't generate parens around NONE-NONE and ATOMIC-ATOMIC pairs.
       // 0 is the atomic order, 99 is the none order.  No parentheses needed.
       // In all known languages multiple such code blocks are not order
       // sensitive.  In fact in Python ('a' 'b') 'c' would fail.
@@ -239,11 +238,11 @@ Blockly.Generator.prototype.valueToCode = function(block, name, order) {
 Blockly.Generator.prototype.statementToCode = function(block, name) {
   var targetBlock = block.getInputTargetBlock(name);
   var code = this.blockToCode(targetBlock);
-  if (!goog.isString(code)) {
-    // Value blocks must return code and order of operations info.
-    // Statement blocks must only return code.
-    throw 'Expecting code from statement block "' + targetBlock.type + '".';
-  }
+  // Value blocks must return code and order of operations info.
+  // Statement blocks must only return code.
+  goog.asserts.assertString(code,
+      'Expecting code from statement block "%s".',
+      targetBlock && targetBlock.type);
   if (code) {
     code = this.prefixLines(/** @type {string} */ (code), this.INDENT);
   }

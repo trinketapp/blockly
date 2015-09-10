@@ -1,5 +1,5 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="unittest_main" x="0" y="1">
+  <block type="unittest_main" x="14" y="-11">
     <statement name="DO">
       <block type="procedures_callnoreturn">
         <mutation name="test empty"></mutation>
@@ -27,6 +27,16 @@
                                     <next>
                                       <block type="procedures_callnoreturn">
                                         <mutation name="test sublist"></mutation>
+                                        <next>
+                                          <block type="procedures_callnoreturn">
+                                            <mutation name="test join"></mutation>
+                                            <next>
+                                              <block type="procedures_callnoreturn">
+                                                <mutation name="test split"></mutation>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
                                       </block>
                                     </next>
                                   </block>
@@ -47,7 +57,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="36" y="439">
-    <mutation></mutation>
     <field name="NAME">test create</field>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
@@ -138,7 +147,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="33" y="965">
-    <mutation></mutation>
     <field name="NAME">test empty</field>
     <statement name="STACK">
       <block type="unittest_assertvalue" inline="false">
@@ -175,7 +183,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="25" y="1181">
-    <mutation></mutation>
     <field name="NAME">test length</field>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
@@ -252,7 +259,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="24" y="1556">
-    <mutation></mutation>
     <field name="NAME">test find</field>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
@@ -391,7 +397,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="25" y="2199">
-    <mutation></mutation>
     <field name="NAME">test get</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -420,7 +425,7 @@
           <block type="unittest_assertequals" inline="false">
             <field name="MESSAGE">get first</field>
             <value name="ACTUAL">
-              <block type="lists_getIndex" inline="true">
+              <block type="lists_getIndex">
                 <mutation statement="false" at="false"></mutation>
                 <field name="MODE">GET</field>
                 <field name="WHERE">FIRST</field>
@@ -440,7 +445,7 @@
               <block type="unittest_assertequals" inline="false">
                 <field name="MESSAGE">get last</field>
                 <value name="ACTUAL">
-                  <block type="lists_getIndex" inline="true">
+                  <block type="lists_getIndex">
                     <mutation statement="false" at="false"></mutation>
                     <field name="MODE">GET</field>
                     <field name="WHERE">LAST</field>
@@ -461,7 +466,7 @@
                     <field name="MESSAGE">get random</field>
                     <field name="EXPECTED">TRUE</field>
                     <value name="ACTUAL">
-                      <block type="math_number_property" inline="true">
+                      <block type="math_number_property">
                         <mutation divisor_input="false"></mutation>
                         <field name="PROPERTY">POSITIVE</field>
                         <value name="NUMBER_TO_CHECK">
@@ -473,7 +478,7 @@
                               </block>
                             </value>
                             <value name="FIND">
-                              <block type="lists_getIndex" inline="true">
+                              <block type="lists_getIndex">
                                 <mutation statement="false" at="false"></mutation>
                                 <field name="MODE">GET</field>
                                 <field name="WHERE">RANDOM</field>
@@ -492,7 +497,7 @@
                       <block type="unittest_assertequals" inline="false">
                         <field name="MESSAGE">get #</field>
                         <value name="ACTUAL">
-                          <block type="lists_getIndex" inline="true">
+                          <block type="lists_getIndex">
                             <mutation statement="false" at="true"></mutation>
                             <field name="MODE">GET</field>
                             <field name="WHERE">FROM_START</field>
@@ -517,7 +522,7 @@
                           <block type="unittest_assertequals" inline="false">
                             <field name="MESSAGE">get #-end</field>
                             <value name="ACTUAL">
-                              <block type="lists_getIndex" inline="true">
+                              <block type="lists_getIndex">
                                 <mutation statement="false" at="true"></mutation>
                                 <field name="MODE">GET</field>
                                 <field name="WHERE">FROM_END</field>
@@ -552,7 +557,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="23" y="2832">
-    <mutation></mutation>
     <field name="NAME">test get remove</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -581,7 +585,7 @@
           <block type="unittest_assertequals" inline="false">
             <field name="MESSAGE">getremove first</field>
             <value name="ACTUAL">
-              <block type="lists_getIndex" inline="true">
+              <block type="lists_getIndex">
                 <mutation statement="false" at="false"></mutation>
                 <field name="MODE">GET_REMOVE</field>
                 <field name="WHERE">FIRST</field>
@@ -647,7 +651,7 @@
                       <block type="unittest_assertequals" inline="false">
                         <field name="MESSAGE">getremove last</field>
                         <value name="ACTUAL">
-                          <block type="lists_getIndex" inline="true">
+                          <block type="lists_getIndex">
                             <mutation statement="false" at="false"></mutation>
                             <field name="MODE">GET_REMOVE</field>
                             <field name="WHERE">LAST</field>
@@ -714,7 +718,7 @@
                                     <field name="MESSAGE">getremove random</field>
                                     <field name="EXPECTED">TRUE</field>
                                     <value name="ACTUAL">
-                                      <block type="logic_compare" inline="true">
+                                      <block type="logic_compare">
                                         <field name="OP">EQ</field>
                                         <value name="A">
                                           <block type="lists_indexOf" inline="false">
@@ -725,7 +729,7 @@
                                               </block>
                                             </value>
                                             <value name="FIND">
-                                              <block type="lists_getIndex" inline="true">
+                                              <block type="lists_getIndex">
                                                 <mutation statement="false" at="false"></mutation>
                                                 <field name="MODE">GET_REMOVE</field>
                                                 <field name="WHERE">RANDOM</field>
@@ -789,7 +793,7 @@
                                               <block type="unittest_assertequals" inline="false">
                                                 <field name="MESSAGE">getremove #</field>
                                                 <value name="ACTUAL">
-                                                  <block type="lists_getIndex" inline="true">
+                                                  <block type="lists_getIndex">
                                                     <mutation statement="false" at="true"></mutation>
                                                     <field name="MODE">GET_REMOVE</field>
                                                     <field name="WHERE">FROM_START</field>
@@ -860,7 +864,7 @@
                                                           <block type="unittest_assertequals" inline="false">
                                                             <field name="MESSAGE">getremove #-end</field>
                                                             <value name="ACTUAL">
-                                                              <block type="lists_getIndex" inline="true">
+                                                              <block type="lists_getIndex">
                                                                 <mutation statement="false" at="true"></mutation>
                                                                 <field name="MODE">GET_REMOVE</field>
                                                                 <field name="WHERE">FROM_END</field>
@@ -936,7 +940,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="15" y="4378">
-    <mutation></mutation>
     <field name="NAME">test remove</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -962,7 +965,7 @@
           </block>
         </value>
         <next>
-          <block type="lists_getIndex" inline="true">
+          <block type="lists_getIndex">
             <mutation statement="true" at="false"></mutation>
             <field name="MODE">REMOVE</field>
             <field name="WHERE">FIRST</field>
@@ -1018,7 +1021,7 @@
                       </block>
                     </value>
                     <next>
-                      <block type="lists_getIndex" inline="true">
+                      <block type="lists_getIndex">
                         <mutation statement="true" at="false"></mutation>
                         <field name="MODE">REMOVE</field>
                         <field name="WHERE">LAST</field>
@@ -1074,7 +1077,7 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="lists_getIndex" inline="true">
+                                  <block type="lists_getIndex">
                                     <mutation statement="true" at="false"></mutation>
                                     <field name="MODE">REMOVE</field>
                                     <field name="WHERE">RANDOM</field>
@@ -1124,7 +1127,7 @@
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="lists_getIndex" inline="true">
+                                              <block type="lists_getIndex">
                                                 <mutation statement="true" at="true"></mutation>
                                                 <field name="MODE">REMOVE</field>
                                                 <field name="WHERE">FROM_START</field>
@@ -1185,7 +1188,7 @@
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="lists_getIndex" inline="true">
+                                                          <block type="lists_getIndex">
                                                             <mutation statement="true" at="true"></mutation>
                                                             <field name="MODE">REMOVE</field>
                                                             <field name="WHERE">FROM_END</field>
@@ -1254,7 +1257,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="17" y="5626">
-    <mutation></mutation>
     <field name="NAME">test set</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -1280,7 +1282,7 @@
           </block>
         </value>
         <next>
-          <block type="lists_setIndex" inline="true">
+          <block type="lists_setIndex">
             <mutation at="false"></mutation>
             <field name="MODE">SET</field>
             <field name="WHERE">FIRST</field>
@@ -1346,7 +1348,7 @@
                       </block>
                     </value>
                     <next>
-                      <block type="lists_setIndex" inline="true">
+                      <block type="lists_setIndex">
                         <mutation at="false"></mutation>
                         <field name="MODE">SET</field>
                         <field name="WHERE">LAST</field>
@@ -1412,7 +1414,7 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="lists_setIndex" inline="true">
+                                  <block type="lists_setIndex">
                                     <mutation at="false"></mutation>
                                     <field name="MODE">SET</field>
                                     <field name="WHERE">RANDOM</field>
@@ -1467,7 +1469,7 @@
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="lists_setIndex" inline="true">
+                                              <block type="lists_setIndex">
                                                 <mutation at="true"></mutation>
                                                 <field name="MODE">SET</field>
                                                 <field name="WHERE">FROM_START</field>
@@ -1538,7 +1540,7 @@
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="lists_setIndex" inline="true">
+                                                          <block type="lists_setIndex">
                                                             <mutation at="true"></mutation>
                                                             <field name="MODE">SET</field>
                                                             <field name="WHERE">FROM_END</field>
@@ -1617,7 +1619,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="32" y="6947">
-    <mutation></mutation>
     <field name="NAME">test insert</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -1643,7 +1644,7 @@
           </block>
         </value>
         <next>
-          <block type="lists_setIndex" inline="true">
+          <block type="lists_setIndex">
             <mutation at="false"></mutation>
             <field name="MODE">INSERT</field>
             <field name="WHERE">FIRST</field>
@@ -1714,7 +1715,7 @@
                       </block>
                     </value>
                     <next>
-                      <block type="lists_setIndex" inline="true">
+                      <block type="lists_setIndex">
                         <mutation at="false"></mutation>
                         <field name="MODE">INSERT</field>
                         <field name="WHERE">LAST</field>
@@ -1785,7 +1786,7 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="lists_setIndex" inline="true">
+                                  <block type="lists_setIndex">
                                     <mutation at="false"></mutation>
                                     <field name="MODE">INSERT</field>
                                     <field name="WHERE">RANDOM</field>
@@ -1840,7 +1841,7 @@
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="lists_setIndex" inline="true">
+                                              <block type="lists_setIndex">
                                                 <mutation at="true"></mutation>
                                                 <field name="MODE">INSERT</field>
                                                 <field name="WHERE">FROM_START</field>
@@ -1916,7 +1917,7 @@
                                                           </block>
                                                         </value>
                                                         <next>
-                                                          <block type="lists_setIndex" inline="true">
+                                                          <block type="lists_setIndex">
                                                             <mutation at="true"></mutation>
                                                             <field name="MODE">INSERT</field>
                                                             <field name="WHERE">FROM_END</field>
@@ -2000,7 +2001,6 @@
     </statement>
   </block>
   <block type="procedures_defnoreturn" x="47" y="8393">
-    <mutation></mutation>
     <field name="NAME">test sublist</field>
     <statement name="STACK">
       <block type="variables_set" inline="false">
@@ -2039,7 +2039,7 @@
           <block type="unittest_assertequals" inline="false">
             <field name="MESSAGE">sublist # start</field>
             <value name="ACTUAL">
-              <block type="lists_getSublist" inline="true">
+              <block type="lists_getSublist">
                 <mutation at1="true" at2="true"></mutation>
                 <field name="WHERE1">FROM_START</field>
                 <field name="WHERE2">FROM_START</field>
@@ -2079,7 +2079,7 @@
               <block type="unittest_assertequals" inline="false">
                 <field name="MESSAGE">sublist # end</field>
                 <value name="ACTUAL">
-                  <block type="lists_getSublist" inline="true">
+                  <block type="lists_getSublist">
                     <mutation at1="true" at2="true"></mutation>
                     <field name="WHERE1">FROM_END</field>
                     <field name="WHERE2">FROM_END</field>
@@ -2119,7 +2119,7 @@
                   <block type="unittest_assertequals" inline="false">
                     <field name="MESSAGE">sublist first-last</field>
                     <value name="ACTUAL">
-                      <block type="lists_getSublist" inline="true">
+                      <block type="lists_getSublist">
                         <mutation at1="false" at2="false"></mutation>
                         <field name="WHERE1">FIRST</field>
                         <field name="WHERE2">LAST</field>
@@ -2139,6 +2139,114 @@
                 </next>
               </block>
             </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="52" y="8999">
+    <field name="NAME">test join</field>
+    <statement name="STACK">
+      <block type="variables_set" inline="false">
+        <field name="VAR">list</field>
+        <value name="VALUE">
+          <block type="lists_create_with" inline="false">
+            <mutation items="3"></mutation>
+            <value name="ADD0">
+              <block type="text">
+                <field name="TEXT">Vulcan</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="text">
+                <field name="TEXT">Klingon</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="text">
+                <field name="TEXT">Borg</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertequals" inline="false">
+            <field name="MESSAGE">join</field>
+            <value name="ACTUAL">
+              <block type="lists_split">
+                <mutation mode="JOIN"></mutation>
+                <field name="MODE">JOIN</field>
+                <value name="INPUT">
+                  <block type="variables_get">
+                    <field name="VAR">list</field>
+                  </block>
+                </value>
+                <value name="DELIM">
+                  <block type="text">
+                    <field name="TEXT">,</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="text">
+                <field name="TEXT">Vulcan,Klingon,Borg</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="46" y="9316">
+    <field name="NAME">test split</field>
+    <statement name="STACK">
+      <block type="variables_set" inline="false">
+        <field name="VAR">list</field>
+        <value name="VALUE">
+          <block type="lists_split">
+            <mutation mode="SPLIT"></mutation>
+            <field name="MODE">SPLIT</field>
+            <value name="INPUT">
+              <block type="text">
+                <field name="TEXT">Vulcan,Klingon,Borg</field>
+              </block>
+            </value>
+            <value name="DELIM">
+              <block type="text">
+                <field name="TEXT">,</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertequals" inline="false">
+            <field name="MESSAGE">join</field>
+            <value name="ACTUAL">
+              <block type="variables_get">
+                <field name="VAR">list</field>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="lists_create_with" inline="false">
+                <mutation items="3"></mutation>
+                <value name="ADD0">
+                  <block type="text">
+                    <field name="TEXT">Vulcan</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text">
+                    <field name="TEXT">Klingon</field>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="text">
+                    <field name="TEXT">Borg</field>
+                  </block>
+                </value>
+              </block>
+            </value>
           </block>
         </next>
       </block>

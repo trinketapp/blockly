@@ -31,7 +31,7 @@ goog.require('Blockly.Generator');
 
 /**
  * Dart code generator.
- * @type !Blockly.Generator
+ * @type {!Blockly.Generator}
  */
 Blockly.Dart = new Blockly.Generator('Dart');
 
@@ -73,8 +73,9 @@ Blockly.Dart.ORDER_NONE = 99;          // (...)
 
 /**
  * Initialise the database of variable names.
+ * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
-Blockly.Dart.init = function() {
+Blockly.Dart.init = function(workspace) {
   // Create a dictionary of definitions to be printed before the code.
   Blockly.Dart.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
@@ -89,10 +90,10 @@ Blockly.Dart.init = function() {
   }
 
   var defvars = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    defvars[x] = 'var ' +
-        Blockly.Dart.variableDB_.getName(variables[x],
+  var variables = Blockly.Variables.allVariables(workspace);
+  for (var i = 0; i < variables.length; i++) {
+    defvars[i] = 'var ' +
+        Blockly.Dart.variableDB_.getName(variables[i],
         Blockly.Variables.NAME_TYPE) + ';';
   }
   Blockly.Dart.definitions_['variables'] = defvars.join('\n');
@@ -121,6 +122,10 @@ Blockly.Dart.finish = function(code) {
       definitions.push(def);
     }
   }
+  // Clean up temporary data.
+  delete Blockly.Dart.definitions_;
+  delete Blockly.Dart.functionNames_;
+  Blockly.Dart.variableDB_.reset();
   var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
