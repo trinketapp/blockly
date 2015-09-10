@@ -31,12 +31,13 @@ goog.require('Blockly.Python');
 
 Blockly.Python['controls_repeat_ext'] = function(block) {
   // Repeat n times.
+  var repeats;
   if (block.getField('TIMES')) {
     // Internal number.
-    var repeats = parseInt(block.getFieldValue('TIMES'), 10);
+    repeats = parseInt(block.getFieldValue('TIMES'), 10);
   } else {
     // External number.
-    var repeats = Blockly.Python.valueToCode(block, 'TIMES',
+    repeats = Blockly.Python.valueToCode(block, 'TIMES',
         Blockly.Python.ORDER_NONE) || '0';
   }
   if (Blockly.isNumber(repeats)) {
