@@ -308,6 +308,11 @@ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = '×';
 /// value of the left operand is L and the value of the right operand (the exponent) is
 /// R, multiply L by itself R times.  (Fractional and negative exponents are also legal.)
 Blockly.Msg.MATH_POWER_SYMBOL = '^';
+/// {{optional}}\nmath - The symbol for the binary operation floor division. Used in Python, the
+/// left operand is divided by the right operand and the result is floored.
+Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = '//';
+/// {{optional}}\nmath - The symbol for the binary operation modulo.
+Blockly.Msg.MATH_MODULUS_SYMBOL = '%';
 
 /// math - The short name of the trigonometric function
 /// [https://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent sine].
@@ -340,6 +345,10 @@ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two nu
 Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
 /// tooltip - See [https://en.wikipedia.org/wiki/Exponentiation https://en.wikipedia.org/wiki/Exponentiation].
 Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to the power of the second number.';
+/// tooltip - See [https://en.wikibooks.org/wiki/Python_Programming/Operators#Division_and_Type_Conversion https://en.wikibooks.org/wiki/Python_Programming/Operators#Division_and_Type_Conversion].
+Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = 'Return the quotient of the two numbers with decimals removed.';
+/// tooltip - See [https://en.wikipedia.org/wiki/Modulo_operation https://en.wikipedia.org/wiki/Modulo_operation].
+Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = 'Return the remainder after dividing the two numbers.';
 
 /// url - Information about the square root operation.
 Blockly.Msg.MATH_SINGLE_HELPURL = 'https://en.wikipedia.org/wiki/Square_root';
