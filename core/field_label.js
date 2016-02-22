@@ -40,10 +40,9 @@ goog.require('goog.math.Size');
  * @constructor
  */
 Blockly.FieldLabel = function(text, opt_class) {
-  this.sourceBlock_ = null;
   this.size_ = new goog.math.Size(0, 17.5);
   this.class_ = opt_class;
-  this.setText(text);
+  this.setValue(text);
 };
 goog.inherits(Blockly.FieldLabel, Blockly.Field);
 
