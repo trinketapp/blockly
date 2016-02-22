@@ -48,23 +48,11 @@ Blockly.inject = function(container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   var options = Blockly.parseOptions_(opt_options || {});
-  var workspace;
-  var startUi = function() {
-    var svg = Blockly.createDom_(container, options);
-    workspace = Blockly.createMainWorkspace_(svg, options);
-    Blockly.init_(workspace);
-    workspace.markFocused();
-    Blockly.bindEvent_(svg, 'focus', workspace, workspace.markFocused);
-  };
-  if (options.enableRealtime) {
-    var realtimeElement = document.getElementById('realtime');
-    if (realtimeElement) {
-      realtimeElement.style.display = 'block';
-    }
-    Blockly.Realtime.startRealtime(startUi, container, options.realtimeOptions);
-  } else {
-    startUi();
-  }
+  var svg = Blockly.createDom_(container, options);
+  var workspace = Blockly.createMainWorkspace_(svg, options);
+  Blockly.init_(workspace);
+  workspace.markFocused();
+  Blockly.bindEvent_(svg, 'focus', workspace, workspace.markFocused);
   return workspace;
 };
 
@@ -76,12 +64,16 @@ Blockly.inject = function(container, opt_options) {
  */
 Blockly.parseToolboxTree_ = function(tree) {
   if (tree) {
-    if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
-      // In this case the tree will not have been properly built by the
-      // browser. The HTML will be contained in the element, but it will
-      // not have the proper DOM structure since the browser doesn't support
-      // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
-      tree = tree.outerHTML;
+    if (typeof tree != 'string') {
+      if (typeof XSLTProcessor == 'undefined' && tree.outerHTML) {
+        // In this case the tree will not have been properly built by the
+        // browser. The HTML will be contained in the element, but it will
+        // not have the proper DOM structure since the browser doesn't support
+        // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
+        tree = tree.outerHTML;
+      } else if (!(tree instanceof Element)) {
+        tree = null;
+      }
     }
     if (typeof tree == 'string') {
       tree = Blockly.Xml.textToDom(tree);
@@ -158,72 +150,39 @@ Blockly.parseOptions_ = function(options) {
     pathToMedia = options['path'] + 'media/';
   }
 
-/* TODO (fraser): Add documentation page:
- * https://developers.google.com/blockly/installation/zoom
- *
- * enabled
- *
- * Set to `true` to allow zooming of the main workspace.  Zooming is only
- * possible if the workspace has scrollbars.  If `false`, then the options
- * below have no effect.  Defaults to `false`.
- *
- * controls
- *
- * Set to `true` to show zoom-in and zoom-out buttons.  Defaults to `true`.
- *
- * wheel
- *
- * Set to `true` to allow the mouse wheel to zoom.  Defaults to `true`.
- *
- * maxScale
- *
- * Maximum multiplication factor for how far one can zoom in.  Defaults to `3`.
- *
- * minScale
- *
- * Minimum multiplication factor for how far one can zoom out.  Defaults to `0.3`.
- *
- * scaleSpeed
- *
- * For each zooming in-out step the scale is multiplied
- * or divided respectively by the scale speed, this means that:
- * `scale = scaleSpeed ^ steps`, note that in this formula
- * steps of zoom-out are subtracted and zoom-in steps are added.
- */
   // See zoom documentation at:
   // https://developers.google.com/blockly/installation/zoom
   var zoom = options['zoom'] || {};
   var zoomOptions = {};
-  zoomOptions.enabled = hasScrollbars && !!zoom['enabled'];
-  if (zoomOptions.enabled) {
-    if (zoom['controls'] === undefined) {
-      zoomOptions.controls = true;
-    } else {
-      zoomOptions.controls = !!zoom['controls'];
-    }
-    if (zoom['wheel'] === undefined) {
-      zoomOptions.wheel = true;
-    } else {
-      zoomOptions.wheel = !!zoom['wheel'];
-    }
-    if (zoom['maxScale'] === undefined) {
-      zoomOptions.maxScale = 3;
-    } else {
-      zoomOptions.maxScale = parseFloat(zoom['maxScale']);
-    }
-    if (zoom['minScale'] === undefined) {
-      zoomOptions.minScale = 0.3;
-    } else {
-      zoomOptions.minScale = parseFloat(zoom['minScale']);
-    }
-    if (zoom['scaleSpeed'] === undefined) {
-      zoomOptions.scaleSpeed = 1.2;
-    } else {
-      zoomOptions.scaleSpeed = parseFloat(zoom['scaleSpeed']);
-    }
-  } else {
+  if (zoom['controls'] === undefined) {
     zoomOptions.controls = false;
+  } else {
+    zoomOptions.controls = !!zoom['controls'];
+  }
+  if (zoom['wheel'] === undefined) {
     zoomOptions.wheel = false;
+  } else {
+    zoomOptions.wheel = !!zoom['wheel'];
+  }
+  if (zoom['startScale'] === undefined) {
+    zoomOptions.startScale = 1;
+  } else {
+    zoomOptions.startScale = parseFloat(zoom['startScale']);
+  }
+  if (zoom['maxScale'] === undefined) {
+    zoomOptions.maxScale = 3;
+  } else {
+    zoomOptions.maxScale = parseFloat(zoom['maxScale']);
+  }
+  if (zoom['minScale'] === undefined) {
+    zoomOptions.minScale = 0.3;
+  } else {
+    zoomOptions.minScale = parseFloat(zoom['minScale']);
+  }
+  if (zoom['scaleSpeed'] === undefined) {
+    zoomOptions.scaleSpeed = 1.2;
+  } else {
+    zoomOptions.scaleSpeed = parseFloat(zoom['scaleSpeed']);
   }
 
   var enableRealtime = !!options['realtime'];
@@ -292,9 +251,9 @@ Blockly.createDom_ = function(container, options) {
   </defs>
   */
   var defs = Blockly.createSvgElement('defs', {}, svg);
-  var filter, feSpecularLighting, feMerge;
+  var rnd = String(Math.random()).substring(2);
   /*
-    <filter id="blocklyEmboss">
+    <filter id="blocklyEmbossFilter837493">
       <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
       <feSpecularLighting in="blur" surfaceScale="1" specularConstant="0.5"
                           specularExponent="10" lighting-color="white"
@@ -307,43 +266,39 @@ Blockly.createDom_ = function(container, options) {
                    k1="0" k2="1" k3="1" k4="0"/>
     </filter>
   */
-  filter = Blockly.createSvgElement('filter', {'id': 'blocklyEmboss'}, defs);
+  var embossFilter = Blockly.createSvgElement('filter',
+      {'id': 'blocklyEmbossFilter' + rnd}, defs);
   Blockly.createSvgElement('feGaussianBlur',
-      {'in': 'SourceAlpha', 'stdDeviation': 1, 'result': 'blur'}, filter);
-  feSpecularLighting = Blockly.createSvgElement('feSpecularLighting',
+      {'in': 'SourceAlpha', 'stdDeviation': 1, 'result': 'blur'}, embossFilter);
+  var feSpecularLighting = Blockly.createSvgElement('feSpecularLighting',
       {'in': 'blur', 'surfaceScale': 1, 'specularConstant': 0.5,
        'specularExponent': 10, 'lighting-color': 'white', 'result': 'specOut'},
-      filter);
+      embossFilter);
   Blockly.createSvgElement('fePointLight',
       {'x': -5000, 'y': -10000, 'z': 20000}, feSpecularLighting);
   Blockly.createSvgElement('feComposite',
       {'in': 'specOut', 'in2': 'SourceAlpha', 'operator': 'in',
-       'result': 'specOut'}, filter);
+       'result': 'specOut'}, embossFilter);
   Blockly.createSvgElement('feComposite',
       {'in': 'SourceGraphic', 'in2': 'specOut', 'operator': 'arithmetic',
-       'k1': 0, 'k2': 1, 'k3': 1, 'k4': 0}, filter);
+       'k1': 0, 'k2': 1, 'k3': 1, 'k4': 0}, embossFilter);
+  options.embossFilterId = embossFilter.id;
   /*
-    <filter id="blocklyShadowFilter">
-      <feGaussianBlur stdDeviation="2"/>
-    </filter>
-  */
-  filter = Blockly.createSvgElement('filter',
-      {'id': 'blocklyShadowFilter'}, defs);
-  Blockly.createSvgElement('feGaussianBlur', {'stdDeviation': 2}, filter);
-  /*
-    <pattern id="blocklyDisabledPattern" patternUnits="userSpaceOnUse"
+    <pattern id="blocklyDisabledPattern837493" patternUnits="userSpaceOnUse"
              width="10" height="10">
       <rect width="10" height="10" fill="#aaa" />
       <path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0" />
     </pattern>
   */
   var disabledPattern = Blockly.createSvgElement('pattern',
-      {'id': 'blocklyDisabledPattern', 'patternUnits': 'userSpaceOnUse',
+      {'id': 'blocklyDisabledPattern' + rnd,
+       'patternUnits': 'userSpaceOnUse',
        'width': 10, 'height': 10}, defs);
   Blockly.createSvgElement('rect',
       {'width': 10, 'height': 10, 'fill': '#aaa'}, disabledPattern);
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, disabledPattern);
+  options.disabledPatternId = disabledPattern.id;
   /*
     <pattern id="blocklyGridPattern837493" patternUnits="userSpaceOnUse">
       <rect stroke="#888" />
@@ -351,7 +306,7 @@ Blockly.createDom_ = function(container, options) {
     </pattern>
   */
   var gridPattern = Blockly.createSvgElement('pattern',
-      {'id': 'blocklyGridPattern' + String(Math.random()).substring(2),
+      {'id': 'blocklyGridPattern' + rnd,
        'patternUnits': 'userSpaceOnUse'}, defs);
   if (options.gridOptions['length'] > 0 && options.gridOptions['spacing'] > 0) {
     Blockly.createSvgElement('line',
@@ -365,7 +320,6 @@ Blockly.createDom_ = function(container, options) {
     // x1, y1, x1, x2 properties will be set later in updateGridPattern_.
   }
   options.gridPattern = gridPattern;
-  options.svg = svg;
   return svg;
 };
 
@@ -381,7 +335,10 @@ Blockly.createMainWorkspace_ = function(svg, options) {
   options.getMetrics = Blockly.getMainWorkspaceMetrics_;
   options.setMetrics = Blockly.setMainWorkspaceMetrics_;
   var mainWorkspace = new Blockly.WorkspaceSvg(options);
+  mainWorkspace.scale = options.zoomOptions.startScale;
   svg.appendChild(mainWorkspace.createDom('blocklyMainBackground'));
+  // A null translation will also apply the correct initial scale.
+  mainWorkspace.translate(0, 0);
   mainWorkspace.markFocused();
 
   if (!options.readOnly && !options.hasScrollbars) {
@@ -445,7 +402,7 @@ Blockly.createMainWorkspace_ = function(svg, options) {
  */
 Blockly.init_ = function(mainWorkspace) {
   var options = mainWorkspace.options;
-  var svg = mainWorkspace.options.svg;
+  var svg = mainWorkspace.getParentSvg();
   // Supress the browser's context menu.
   Blockly.bindEvent_(svg, 'contextmenu', null,
       function(e) {
@@ -510,6 +467,10 @@ Blockly.init_ = function(mainWorkspace) {
         [options.pathToMedia + 'click.mp3',
          options.pathToMedia + 'click.wav',
          options.pathToMedia + 'click.ogg'], 'click');
+    mainWorkspace.loadAudio_(
+        [options.pathToMedia + 'disconnect.wav',
+         options.pathToMedia + 'disconnect.mp3',
+         options.pathToMedia + 'disconnect.ogg'], 'disconnect');
     mainWorkspace.loadAudio_(
         [options.pathToMedia + 'delete.mp3',
          options.pathToMedia + 'delete.ogg',

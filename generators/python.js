@@ -200,12 +200,19 @@ Blockly.Python.scrub_ = function(block, code) {
   if (Blockly.Python.mapBlocks_) {
     var lines = code.split('\n');
     var lastline = lines[lines.length - 1];
+
     if (/^  \//.test(lastline)) {
       lastline = lastline.substring(2, lastline.length);
       lines[lines.length - 1] = lastline;
     }
     code = lines.join('\n');
-    code = '/** ' + block.id + ' **/' + code + '/** end ' + block.id + ' **/';
+
+    var startTag = '/** ' + block.id + ' **/';
+    var endTag   = '/** end ' + block.id + ' **/';
+
+    // ensure endTag comes before any final newlines
+    code = code.replace(/(\n*)$/, endTag + "$1");
+    code = startTag + code;
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   var nextCode = Blockly.Python.blockToCode(nextBlock);

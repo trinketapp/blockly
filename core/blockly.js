@@ -27,8 +27,8 @@
 // Top level object for Blockly.
 goog.provide('Blockly');
 
-// Blockly core dependencies.
 goog.require('Blockly.BlockSvg');
+goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
@@ -42,16 +42,17 @@ goog.require('Blockly.FieldVariable');
 goog.require('Blockly.Generator');
 goog.require('Blockly.Msg');
 goog.require('Blockly.Procedures');
-goog.require('Blockly.Realtime');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.WidgetDiv');
 goog.require('Blockly.WorkspaceSvg');
 goog.require('Blockly.inject');
 goog.require('Blockly.utils');
-
-// Closure dependencies.
 goog.require('goog.color');
+goog.require('goog.userAgent');
 
+
+// Turn off debugging when compiled.
+var CLOSURE_DEFINES = {'goog.DEBUG': false};
 
 /**
  * Required name space for SVG elements.
@@ -89,7 +90,7 @@ Blockly.SPRITE = {
  * @param {number} hue Hue on a colour wheel (0-360).
  * @return {string} RGB code, e.g. '#5ba65b'.
  */
-Blockly.makeColour = function(hue) {
+Blockly.hueToRgb = function(hue) {
   return goog.color.hsvToHex(hue, Blockly.HSV_SATURATION,
       Blockly.HSV_VALUE * 255);
 };
@@ -207,7 +208,7 @@ Blockly.clipboardXml_ = null;
 
 /**
  * Source of the local clipboard.
- * @type {Blockly.Workspace}
+ * @type {Blockly.WorkspaceSvg}
  * @private
  */
 Blockly.clipboardSource_ = null;
@@ -248,7 +249,7 @@ Blockly.svgResize = function(workspace) {
   while (mainWorkspace.options.parentWorkspace) {
     mainWorkspace = mainWorkspace.options.parentWorkspace;
   }
-  var svg = mainWorkspace.options.svg;
+  var svg = mainWorkspace.getParentSvg();
   var div = svg.parentNode;
   if (!div) {
     // Workspace deteted, or something.
@@ -333,6 +334,7 @@ Blockly.onKeyDown_ = function(e) {
     // When focused on an HTML text input widget, don't trap any keys.
     return;
   }
+  var deleteBlock = false;
   if (e.keyCode == 27) {
     // Pressing esc closes the context menu.
     Blockly.hideChaff();
@@ -340,8 +342,7 @@ Blockly.onKeyDown_ = function(e) {
     // Delete or backspace.
     try {
       if (Blockly.selected && Blockly.selected.isDeletable()) {
-        Blockly.hideChaff();
-        Blockly.selected.dispose(true, true);
+        deleteBlock = true;
       }
     } finally {
       // Stop the browser from going back to the previous page.
@@ -352,14 +353,14 @@ Blockly.onKeyDown_ = function(e) {
   } else if (e.altKey || e.ctrlKey || e.metaKey) {
     if (Blockly.selected &&
         Blockly.selected.isDeletable() && Blockly.selected.isMovable()) {
-      Blockly.hideChaff();
       if (e.keyCode == 67) {
         // 'c' for copy.
+        Blockly.hideChaff();
         Blockly.copy_(Blockly.selected);
       } else if (e.keyCode == 88) {
         // 'x' for cut.
         Blockly.copy_(Blockly.selected);
-        Blockly.selected.dispose(true, true);
+        deleteBlock = true;
       }
     }
     if (e.keyCode == 86) {
@@ -367,6 +368,16 @@ Blockly.onKeyDown_ = function(e) {
       if (Blockly.clipboardXml_) {
         Blockly.clipboardSource_.paste(Blockly.clipboardXml_);
       }
+    }
+  }
+  if (deleteBlock) {
+    // Common code for delete and cut.
+    Blockly.hideChaff();
+    var heal = Blockly.dragMode_ != 2;
+    Blockly.selected.dispose(heal, true);
+    if (Blockly.highlightedConnection_) {
+      Blockly.highlightedConnection_.unhighlight();
+      Blockly.highlightedConnection_ = null;
     }
   }
 };
@@ -423,14 +434,35 @@ Blockly.longStop_ = function() {
  * @private
  */
 Blockly.copy_ = function(block) {
-  var xmlBlock = Blockly.Xml.blockToDom_(block);
-  Blockly.Xml.deleteNext(xmlBlock);
+  var xmlBlock = Blockly.Xml.blockToDom(block);
+  if (Blockly.dragMode_ != 2) {
+    Blockly.Xml.deleteNext(xmlBlock);
+  }
   // Encode start position in XML.
   var xy = block.getRelativeToSurfaceXY();
   xmlBlock.setAttribute('x', block.RTL ? -xy.x : xy.x);
   xmlBlock.setAttribute('y', xy.y);
   Blockly.clipboardXml_ = xmlBlock;
   Blockly.clipboardSource_ = block.workspace;
+};
+
+/**
+ * Duplicate this block and its children.
+ * @param {!Blockly.Block} block Block to be copied.
+ * @private
+ */
+Blockly.duplicate_ = function(block) {
+  // Save the clipboard.
+  var clipboardXml = Blockly.clipboardXml_;
+  var clipboardSource = Blockly.clipboardSource_;
+
+  // Create a duplicate via a copy/paste operation.
+  Blockly.copy_(block);
+  block.workspace.paste(Blockly.clipboardXml_);
+
+  // Restore the clipboard.
+  Blockly.clipboardXml_ = clipboardXml;
+  Blockly.clipboardSource_ = clipboardSource;
 };
 
 /**
@@ -480,12 +512,15 @@ Blockly.hideChaff = function(opt_allowToolbox) {
  * @this Blockly.WorkspaceSvg
  */
 Blockly.getMainWorkspaceMetrics_ = function() {
-  var svgSize = Blockly.svgSize(this.options.svg);
+  var svgSize = Blockly.svgSize(this.getParentSvg());
   if (this.toolbox_) {
     svgSize.width -= this.toolbox_.width;
   }
-  var viewWidth = svgSize.width - Blockly.Scrollbar.scrollbarThickness;
-  var viewHeight = svgSize.height - Blockly.Scrollbar.scrollbarThickness;
+  // Set the margin to match the flyout's margin so that the workspace does
+  // not jump as blocks are added.
+  var MARGIN = Blockly.Flyout.prototype.CORNER_RADIUS - 1;
+  var viewWidth = svgSize.width - MARGIN;
+  var viewHeight = svgSize.height - MARGIN;
   try {
     var blockBox = this.getCanvas().getBBox();
   } catch (e) {
@@ -557,22 +592,10 @@ Blockly.setMainWorkspaceMetrics_ = function(xyRatio) {
   if (this.options.gridPattern) {
     this.options.gridPattern.setAttribute('x', x);
     this.options.gridPattern.setAttribute('y', y);
-  }
-};
-
-/**
- * Execute a command.  Generally, a command is the result of a user action
- * e.g., a click, drag or context menu selection.  Calling the cmdThunk function
- * through doCommand() allows us to capture information that can be used for
- * capabilities like undo (which is supported by the realtime collaboration
- * feature).
- * @param {function()} cmdThunk A function representing the command execution.
- */
-Blockly.doCommand = function(cmdThunk) {
-  if (Blockly.Realtime.isEnabled) {
-    Blockly.Realtime.doCommand(cmdThunk);
-  } else {
-    cmdThunk();
+    if (goog.userAgent.IE) {
+      // IE doesn't notice that the x/y offsets have changed.  Force an update.
+      this.updateGridPattern_();
+    }
   }
 };
 
