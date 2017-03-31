@@ -181,18 +181,9 @@ Blockly.Python['math_number_property'] = function(block) {
   var code;
   if (dropdown_property == 'PRIME') {
     Blockly.Python.definitions_['import_math'] = 'import math';
-    Blockly.Python.definitions_['from_numbers_import_Number'] =
-        'from numbers import Number';
     var functionName = Blockly.Python.provideFunction_(
         'math_isPrime',
         ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(n):',
-         '  # https://en.wikipedia.org/wiki/Primality_test#Naive_methods',
-         '  # If n is not a number but a string, try parsing it.',
-         '  if not isinstance(n, Number):',
-         '    try:',
-         '      n = float(n)',
-         '    except:',
-         '      return False',
          '  if n == 2 or n == 3:',
          '    return True',
          '  # False if n is negative, is 1, or not whole,' +
@@ -238,8 +229,6 @@ Blockly.Python['math_number_property'] = function(block) {
 
 Blockly.Python['math_change'] = function(block) {
   // Add to a variable in place.
-  Blockly.Python.definitions_['from_numbers_import_Number'] =
-      'from numbers import Number';
   var argument0 = Blockly.Python.valueToCode(block, 'DELTA',
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),
@@ -270,8 +259,6 @@ Blockly.Python['math_on_list'] = function(block) {
       code = 'max(' + list + ')';
       break;
     case 'AVERAGE':
-      Blockly.Python.definitions_['from_numbers_import_Number'] =
-          'from numbers import Number';
       var functionName = Blockly.Python.provideFunction_(
           'math_mean',
           // This operation excludes null and values that aren't int or float:',
@@ -283,8 +270,6 @@ Blockly.Python['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'MEDIAN':
-      Blockly.Python.definitions_['from_numbers_import_Number'] =
-          'from numbers import Number';
       var functionName = Blockly.Python.provideFunction_(
           'math_median',
           // This operation excludes null values:
