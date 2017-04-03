@@ -332,3 +332,14 @@ Blockly.Python['lists_split'] = function(block) {
   }
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
+
+// Code from https://github.com/RealTimeWeb/blockpy
+Blockly.Python['lists_isIn'] = function(block) {
+  // Operations 'in', 'not in'.
+  var operator = (block.getFieldValue('OP') == 'IN') ? 'in' : 'not in';
+  var order = Blockly.Python.ORDER_RELATIONAL;
+  var argument0 = Blockly.Python.valueToCode(block, 'ITEM', order) || '___';
+  var argument1 = Blockly.Python.valueToCode(block, 'LIST', order) || '___';
+  var code = argument0 + ' ' + operator + ' ' + argument1;
+  return [code, order];
+};
