@@ -719,7 +719,7 @@ Blockly.Blocks['lists_isIn'] = {
     var OPERATORS =
         [["is in", 'IN'],
          ["is not in", 'NOTIN']];
-    this.setColour(Blockly.Blocks.lists.HUE);
+    this.setColour(Blockly.Blocks.logic.HUE);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('ITEM');
     this.appendValueInput('LIST')
