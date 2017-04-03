@@ -710,7 +710,7 @@ Blockly.Blocks['lists_split'] = {
 };
 
 // Code from https://github.com/RealTimeWeb/blockpy
-Blockly.Blocks['logic_isIn'] = {
+Blockly.Blocks['lists_isIn'] = {
   /**
    * Block for testing if something contains something.
    * @this Blockly.Block
@@ -719,7 +719,7 @@ Blockly.Blocks['logic_isIn'] = {
     var OPERATORS =
         [["is in", 'IN'],
          ["is not in", 'NOTIN']];
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('ITEM');
     this.appendValueInput('LIST')
