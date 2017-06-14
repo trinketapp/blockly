@@ -260,3 +260,9 @@ Blockly.Python['text_prompt_ext'] = function(block) {
 };
 
 Blockly.Python['text_prompt'] = Blockly.Python['text_prompt_ext'];
+
+Blockly.Python['text_string'] = function(block) {
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || '0';
+  var code = 'str(' + argument0 + ')';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};

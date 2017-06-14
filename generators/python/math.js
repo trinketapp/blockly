@@ -373,3 +373,10 @@ Blockly.Python['math_random_float'] = function(block) {
   Blockly.Python.definitions_['import_random'] = 'import random';
   return ['random.random()', Blockly.Python.ORDER_FUNCTION_CALL];
 };
+
+Blockly.Python['math_convert'] = function(block) {
+  var conversion = block.getFieldValue('CONVERSION');
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || '0';
+  var code = conversion + '(' + argument0 + ')';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};
