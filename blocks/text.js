@@ -690,3 +690,20 @@ Blockly.Blocks['text_prompt'] = {
   mutationToDom: Blockly.Blocks['text_prompt_ext'].mutationToDom,
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation
 };
+
+Blockly.Blocks['text_string'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "convert %1 to string",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "inputsInline": true,
+      "colour": Blockly.Blocks.texts.HUE,
+      "output": "String"
+    });
+  }
+};

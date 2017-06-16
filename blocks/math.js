@@ -516,3 +516,28 @@ Blockly.Blocks['math_random_float'] = {
     this.setTooltip(Blockly.Msg.MATH_RANDOM_FLOAT_TOOLTIP);
   }
 };
+
+Blockly.Blocks['math_convert'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "convert %1 to %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "CONVERSION",
+          "options": [
+            [ "integer", "int" ],
+            [ "float", "float" ]
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "colour": Blockly.Blocks.math.HUE,
+      "output": "Number"
+    });
+  }
+};
