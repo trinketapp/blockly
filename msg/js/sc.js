@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://en.wikipedia.org/wiki/Arithmetic";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Torrat sa summa de is duus nùmerus.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Torrat su cuotzienti de is duus nùmerus.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Torrat sa diferèntzia de is duus nùmerus.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Torrat su produtu de is duus nùmerus.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Torrat su primu numeru artziau a sa potenza de su segundu nùmeru.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "custringi %1 de %2 a %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Custringi unu numeru aintru de is liminaxus giaus (cumprendius).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "fait a ddu dividi po";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "est paris";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "est negativu";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "arrestu de %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Torrat s'arrestu de sa divisioni de duus numerus.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://en.wikipedia.org/wiki/Number";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Unu numeru";

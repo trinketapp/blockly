@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "http://fi.wikipedia.org/wiki/Aritmetiikka";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Palauttaa kahden luvun summan.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Palauttaa jakolaskun osamäärän.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Palauttaa kahden luvun erotuksen.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Palauttaa kertolaskun tulon.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Palauttaa ensimmäisen luvun korotettuna toisen luvun potenssiin.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://fi.wikipedia.org/wiki/Yhteenlasku";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "rajoita %1 vähintään %2 enintään %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Rajoittaa arvon annetulle suljetulle välille.";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "on jaollinen luvulla";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "on parillinen";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "on negatiivinen";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1 ÷ %2 jakojäännös";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Palauttaa jakolaskun jakojäännöksen.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "⋅";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://fi.wikipedia.org/wiki/Luku";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Luku.";

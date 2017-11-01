@@ -168,7 +168,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.LISTS_SPLIT_HELPURL = "https://github.com/google/blockly/wiki/Lists#splitting-strings-and-joining-lists";
 /** @export */ Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT = "сделать список из текста";
 /** @export */ Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST = "собрать текст из списка";
-/** @export */ Blockly.Msg.LISTS_SPLIT_TOOLTIP_JOIN = "Соединяет сптсок текстов в один текст с разделителями.";
+/** @export */ Blockly.Msg.LISTS_SPLIT_TOOLTIP_JOIN = "Соединяет список текстов в один текст с разделителями.";
 /** @export */ Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT = "Разбивает текст в список текстов, по разделителям.";
 /** @export */ Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER = "с разделителем";
 /** @export */ Blockly.Msg.LOGIC_BOOLEAN_FALSE = "ложь";
@@ -184,7 +184,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ = "Возвращает положительное значение, если вводы не равны.";
 /** @export */ Blockly.Msg.LOGIC_NEGATE_HELPURL = "https://github.com/google/blockly/wiki/Logic#not";  // untranslated
 /** @export */ Blockly.Msg.LOGIC_NEGATE_TITLE = "не %1";
-/** @export */ Blockly.Msg.LOGIC_NEGATE_TOOLTIP = "Возвращает значение истина, если вставка ложна.  Возвращает значение ложь, если вставка истинна.";
+/** @export */ Blockly.Msg.LOGIC_NEGATE_TOOLTIP = "Возвращает значение истина, если вставка ложна. Возвращает значение ложь, если вставка истинна.";
 /** @export */ Blockly.Msg.LOGIC_NULL = "ничто";
 /** @export */ Blockly.Msg.LOGIC_NULL_HELPURL = "https://en.wikipedia.org/wiki/Nullable_type";
 /** @export */ Blockly.Msg.LOGIC_NULL_TOOLTIP = "Возвращает ничто.";
@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ru.wikipedia.org/wiki/Арифметика";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Возвращает сумму двух чисел.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Возвращает частное от деления первого числа на второе.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Возвращает разность двух чисел.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Возвращает произведение двух чисел.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Возвращает первое число, возведённое в степень второго числа.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://ru.wikipedia.org/wiki/%D0%98%D0%B4%D0%B8%D0%BE%D0%BC%D0%B0_%28%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%29#.D0.98.D0.BD.D0.BA.D1.80.D0.B5.D0.BC.D0.B5.D0.BD.D1.82";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "ограничить %1 снизу %2 сверху %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Ограничивает число нижней и верхней границами (включительно).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "делится на";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "чётное";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "отрицательное";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://ru.wikipedia.org/wiki/Деление_с_остатком";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "остаток от %1 : %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Возвращает остаток от деления двух чисел.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ru.wikipedia.org/wiki/Число";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Число.";
@@ -382,7 +386,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "обрезать пробелы с двух сторон";
 /** @export */ Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "обрезать пробелы слева";
 /** @export */ Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "обрезать пробелы справа";
-/** @export */ Blockly.Msg.TEXT_TRIM_TOOLTIP = "Возвращает копию текста с пробелами, удалеными с одного или обоих концов.";
+/** @export */ Blockly.Msg.TEXT_TRIM_TOOLTIP = "Возвращает копию текста с пробелами, удалёнными с одного или обоих концов.";
 /** @export */ Blockly.Msg.TODAY = "Сегодня";
 /** @export */ Blockly.Msg.UNDO = "Отменить";
 /** @export */ Blockly.Msg.VARIABLES_DEFAULT_NAME = "элемент";

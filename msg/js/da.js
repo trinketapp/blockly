@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://da.wikipedia.org/wiki/Aritmetik";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Returnere summen af de to tal.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Returnere kvotienten af de to tal.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Returnere forskellen mellem de to tal.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Returnere produktet af de to tal.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Returnere det første tal opløftet til potensen af det andet tal.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "begræns %1 til mellem %2 og %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Begræns et tal til at være mellem de angivne grænser (inklusiv).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = ":";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "er deleligt med";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "er lige";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "er negativt";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://da.wikipedia.org/wiki/Modulo";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "resten af %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Returner resten fra at dividere de to tal.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://da.wikipedia.org/wiki/Tal";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Et tal.";

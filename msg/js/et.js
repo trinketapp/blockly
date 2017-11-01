@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://et.wikipedia.org/wiki/Aritmeetika";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Tagastab kahe arvu summa.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Tagastab kahe arvu jagatise.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Tagastab kahe arvu vahe.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Tagastab kahe arvu korrutise.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Tagastab esimese arvu teise arvu astmes.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "%1 piirang %2 ja %3 vahele";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Piirab arvu väärtuse toodud piiridesse (piirarvud kaasa arvatud).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "jagub arvuga";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "on paarisarv";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "on negatiivne arv";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1 ÷ %2 jääk";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Tagastab esimese numbri teisega jagamisel tekkiva jäägi.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://et.wikipedia.org/wiki/Arv";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Arv.";

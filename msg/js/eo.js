@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://eo.wikipedia.org/wiki/Aritmetiko";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "La sumo de la du nombroj estos liverita.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "La kvociento de la du nombroj estos liverita.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "La diferenco inter la du nombroj estos liverita.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "La produto de la du numeroj estos liverita.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Return the first number raised to the power of the second number.";  // untranslated
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";  // untranslated
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "limigi %1 inter %2 kaj %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "La nombro estos limigita tiel ke ĝi egalas la limojn aŭ troviĝas inter ili.";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "estas dividebla de";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "estas para";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "estas negativa";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://eo.wikipedia.org/wiki/Resto";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "resto de %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "La resto de la divido de du nombroj estos liverita.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://eo.wikipedia.org/wiki/Nombro";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Nombro.";

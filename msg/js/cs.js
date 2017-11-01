@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://cs.wikipedia.org/wiki/Aritmetika";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Vrátí součet dvou čísel.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Vrátí podíl dvou čísel.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Vrátí rozdíl dvou čísel.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Vrátí součin dvou čísel.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Vrátí první číslo umocněné na druhé číslo.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "omez %1 na rozmezí od %2 do %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Omezí číslo tak, aby bylo ve stanovených mezích (včetně).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "je dělitelné číslem";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "je sudé";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "je záporné";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://cs.wikipedia.org/wiki/Modul%C3%A1rn%C3%AD_aritmetika";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "zbytek po dělení %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Vrátí zbytek po dělení dvou čísel.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://cs.wikipedia.org/wiki/Číslo";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Číslo.";

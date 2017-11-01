@@ -9,7 +9,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.ADD_COMMENT = "Adder commento";
 /** @export */ Blockly.Msg.CANNOT_DELETE_VARIABLE_PROCEDURE = "Can't delete the variable '%1' because it's part of the definition of the function '%2'";  // untranslated
 /** @export */ Blockly.Msg.CHANGE_VALUE_TITLE = "Cambiar valor:";
-/** @export */ Blockly.Msg.CLEAN_UP = "Clarar le blocos";
+/** @export */ Blockly.Msg.CLEAN_UP = "Rangiar le blocos";
 /** @export */ Blockly.Msg.COLLAPSE_ALL = "Plicar blocos";
 /** @export */ Blockly.Msg.COLLAPSE_BLOCK = "Plicar bloco";
 /** @export */ Blockly.Msg.COLOUR_BLEND_COLOUR1 = "color 1";
@@ -166,8 +166,8 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.LISTS_SORT_TYPE_NUMERIC = "numeric";
 /** @export */ Blockly.Msg.LISTS_SORT_TYPE_TEXT = "alphabetic";
 /** @export */ Blockly.Msg.LISTS_SPLIT_HELPURL = "https://github.com/google/blockly/wiki/Lists#splitting-strings-and-joining-lists";  // untranslated
-/** @export */ Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT = "Crear un lista per un texto";
-/** @export */ Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST = "crear un texto per un lista";
+/** @export */ Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT = "crear lista ab texto";
+/** @export */ Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST = "crear texto ab lista";
 /** @export */ Blockly.Msg.LISTS_SPLIT_TOOLTIP_JOIN = "Unir un lista de textos, separate per un delimitator, in un sol texto.";
 /** @export */ Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT = "Divider texto in un lista de textos, separante lo a cata delimitator.";
 /** @export */ Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER = "con delimitator";
@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ia.wikipedia.org/wiki/Arithmetica";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Retornar le summa del duo numeros.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Retornar le quotiente del duo numeros.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Retornar le differentia del duo numeros.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Retornar le producto del duo numeros.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Retornar le prime numero elevate al potentia del secunde numero.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";  // untranslated
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "limitar %1 inter %2 e %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Limitar un numero a esser inter le limites specificate (incluse).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "es divisibile per";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "es par";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "es negative";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";  // untranslated
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "resto de %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Retornar le resto del division del duo numeros.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ia.wikipedia.org/wiki/Numero";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Un numero.";

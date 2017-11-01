@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ja.wikipedia.org/wiki/算術";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "2 つの数の合計を返します。";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "2 つの数の商を返します。";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "2 つの数の差を返します。";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "2 つの数の積を返します。";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "最初の数を2 番目の値で累乗した結果を返します。";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://ja.wikipedia.org/wiki/加法";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "%1の下限を%2に上限を%3に制限";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "指定した上限と下限の間に値を制限する（上限と下限の値を含む）。";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "は以下で割りきれる：";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "は偶数";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "は負";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1÷%2の余り";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "2つの数値の割り算の余りを返す。";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ja.wikipedia.org/wiki/数";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "数です。";

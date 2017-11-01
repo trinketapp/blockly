@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://en.wikipedia.org/wiki/ಅಂಕಗಣಿತ";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "ರಡ್ಡ್ ಸಂಖ್ಯೆದ ಮೊತ್ತನ್ ಪಿರಕೊರು.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "ಸಂಖ್ಯೆದ ಭಾಗಲಬ್ದೊನು ಪಿರಕೊರು.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "ರಡ್ಡ ಸ್ಂಖ್ಯೆದ ವ್ಯತ್ಯಾಸೊನು ಪಿರಕೊರು.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "ಸಂಖ್ಯೆದ ಗುಣಲಬ್ಧೊನು ಪಿರಕೊರು.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "ಸುರುತ್ತ ಸಂಖ್ಯೆದ ಘಾತೊನು ರಡ್ಡನೆ ಸಂಖ್ಯೆಗ್ ಏರ್ಪಾದ್ ಪಿರಕೊರು.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "%2 ಕಮ್ಮಿ %3 ಜಾಸ್ತಿ %1 ನಿರ್ಬಂಧ ಮಲ್ಪು";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "ನಿಗದಿತ ಮಿತಿತ ನಡುಟು ಒಂಜಿ ಸಂಖ್ಯೆನ್ ನಿರ್ಬಂಧ ಮಲ್ಪು";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "ಭಾಗಿಪೊಲಿ";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "ಸಮ ಸಂಖ್ಯೆ";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "ಋಣ ಸಂಖ್ಯೆ";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/ಮೋಡ್ಯುಲೊ_ಒಪರೇಶನ್";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = " %1 ÷ %2 ತ ಶೇಷ";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "ರಡ್ಡ್ ಸಂಖ್ಯೆಲೆನ್ ಭಾಗ ಮಲ್ತ್‌ದ್ ಶೇಷೊನು ಪಿರಕೊರು.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://en.wikipedia.org/wiki/ಸಂಖ್ಯೆ";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "ಅ ನಂಬ್ರೊ";

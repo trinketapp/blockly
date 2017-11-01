@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://en.wikipedia.org/wiki/Arithmetic";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "दो संख्याओं का योग रिटर्न करें।";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "दो संख्याओं का भागफल रिटर्न करें।";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "दो संख्याओं का अंतर रिटर्न करें।";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "दो संख्याओं का गुणन रिटर्न करें।";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "दूसरे नंबर की शक्ति को उठाए गए पहले नंबर पर लौटें";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "%1 कम %2 उच्च %3 बाधित करें";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "एक संख्या को निर्दिष्ट सीमा (सम्मिलित) के बीच बाधित करें।";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "इसके द्वारा विभाज्य है";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "सम है";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "ऋणात्मक है";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1 ÷ %2 का शेषफल";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "दो संख्याओं के भाग का शेषफल रिटर्न करें।";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://en.wikipedia.org/wiki/Number";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "एक संख्या।";

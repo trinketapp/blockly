@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2017-09-26 13:14:31.417792",
+		"lastupdated": "2017-11-01 17:44:57.112795",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -132,6 +132,8 @@
 	"MATH_DIVISION_SYMBOL": "÷",
 	"MATH_MULTIPLICATION_SYMBOL": "×",
 	"MATH_POWER_SYMBOL": "^",
+	"MATH_FLOOR_DIVISION_SYMBOL": "//",
+	"MATH_MODULUS_SYMBOL": "%",
 	"MATH_TRIG_SIN": "sin",
 	"MATH_TRIG_COS": "cos",
 	"MATH_TRIG_TAN": "tan",
@@ -144,6 +146,8 @@
 	"MATH_ARITHMETIC_TOOLTIP_MULTIPLY": "Return the product of the two numbers.",
 	"MATH_ARITHMETIC_TOOLTIP_DIVIDE": "Return the quotient of the two numbers.",
 	"MATH_ARITHMETIC_TOOLTIP_POWER": "Return the first number raised to the power of the second number.",
+	"MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION": "Return the quotient of the two numbers with decimals removed.",
+	"MATH_ARITHMETIC_TOOLTIP_MODULUS": "Return the remainder after dividing the two numbers.",
 	"MATH_SINGLE_HELPURL": "https://en.wikipedia.org/wiki/Square_root",
 	"MATH_SINGLE_OP_ROOT": "square root",
 	"MATH_SINGLE_TOOLTIP_ROOT": "Return the square root of a number.",

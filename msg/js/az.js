@@ -75,7 +75,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.HELP = "Kömək";
 /** @export */ Blockly.Msg.INLINE_INPUTS = "Sətiriçi girişlər";
 /** @export */ Blockly.Msg.IOS_CANCEL = "Cancel";  // untranslated
-/** @export */ Blockly.Msg.IOS_ERROR = "Error";  // untranslated
+/** @export */ Blockly.Msg.IOS_ERROR = "Xəta";
 /** @export */ Blockly.Msg.IOS_OK = "OK";  // untranslated
 /** @export */ Blockly.Msg.IOS_PROCEDURES_ADD_INPUT = "+ Add Input";  // untranslated
 /** @export */ Blockly.Msg.IOS_PROCEDURES_ALLOW_STATEMENTS = "Allow statements";  // untranslated
@@ -85,7 +85,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.IOS_VARIABLES_ADD_VARIABLE = "+ Add Variable";  // untranslated
 /** @export */ Blockly.Msg.IOS_VARIABLES_DELETE_BUTTON = "Delete";  // untranslated
 /** @export */ Blockly.Msg.IOS_VARIABLES_EMPTY_NAME_ERROR = "You can't use an empty variable name.";  // untranslated
-/** @export */ Blockly.Msg.IOS_VARIABLES_RENAME_BUTTON = "Rename";  // untranslated
+/** @export */ Blockly.Msg.IOS_VARIABLES_RENAME_BUTTON = "Adını dəyiş";
 /** @export */ Blockly.Msg.IOS_VARIABLES_VARIABLE_NAME = "Variable name";  // untranslated
 /** @export */ Blockly.Msg.LISTS_CREATE_EMPTY_HELPURL = "https://github.com/google/blockly/wiki/Lists#create-empty-list";  // untranslated
 /** @export */ Blockly.Msg.LISTS_CREATE_EMPTY_TITLE = "boş siyahı düzəlt";
@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://az.wikipedia.org/wiki/Hesab";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "İki ədədin cəmini qaytarır.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "İki ədədin nisbətini qaytarır.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "İki ədədin fərqini qaytarır.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "İki ədədin hasilini verir.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Birinci ədədin ikinci ədəd dərəcəsindən qüvvətini qaytarır.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";  // untranslated
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "%1 üçün ən aşağı %2, ən yuxarı %3 olmağı tələb et";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Bir ədədin verilmiş iki ədəd arasında olmasını tələb edir (sərhədlər də daxil olmaqla).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "bölünür";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "cütdür";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "mənfidir";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";  // untranslated
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1 ÷ %2 bölməsinin qalığı";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "İki ədədin nisbətindən alınan qalığı qaytarır.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://az.wikipedia.org/wiki/Ədəd";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Ədəd.";

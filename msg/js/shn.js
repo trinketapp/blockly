@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://en.wikipedia.org/wiki/ပၢႆးၼပ်ႉ";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "လဵဝ်ၶိုၼ်း တၢင်းၼမ် ၼႂ်းမၢႆၼပ်ႉ သွင်";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "လဵဝ်ၶိုၼ်း ပမႃႇၼ ၼႂ်းမၢႆၼပ်ႉ သွင်";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "လဵဝ်ၶိုၼ်း ဢၼ်ပႅၵ်ႇပိူင်ႈ ၼႂ်းမၢႆၼပ်ႉ သွင်";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "လဵဝ်ၶိုၼ်း ဢၼ်ဢဝ်ဢွၵ်ႇ ၼႂ်းမၢႆၼပ်ႉ သွင်";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "လဵဝ်ၶိုၼ်း တူဝ်ၼပ်ႉမၢႆၼိုင်ႈၼႆႉ ၸွႆႈႁႅင်းပၼ် တူဝ်ၼပ်ႉမၢႆသွင်";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";  // untranslated
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "constrain %1 low %2 high %3";  // untranslated
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Constrain a number to be between the specified limits (inclusive).";  // untranslated
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "is divisible by";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "ပဵၼ်ၵူပ်ႉ";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "is negative";  // untranslated
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";  // untranslated
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "remainder of %1 ÷ %2";  // untranslated
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Return the remainder from dividing the two numbers.";  // untranslated
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://en.wikipedia.org/wiki/မၢႆၼပ်ႉ";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "မၢႆၼပ်ႉ ၼိုင်ႈဢၼ်";

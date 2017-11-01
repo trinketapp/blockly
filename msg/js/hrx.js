@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://hrx.wikipedia.org/wiki/Grundrechenoort";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Ist die Summe zwooier Wearte.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Ist der Quotient zwooier Wearte.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Ist die Differenz zwooier Wearte.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Ist das Produkt zwooier Wearte.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Ist der earschte Weart potenziert mit dem zoiten Weart.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://hrx.wikipedia.org/wiki/Inkrement_und_Dekrement";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "begrenze %1 von %2 bis %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Begrenzt den Weartebereich mittels von / bis Wearte. (inklusiv)";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "ist telbar/kann getelt sin doorrich";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "ist grood";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "ist negativ";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://hrx.wikipedia.org/wiki/Modulo";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "Rest von %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Der Rest noh en Division.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://hrx.wikipedia.org/wiki/Zoohl";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "En Zoohl.";

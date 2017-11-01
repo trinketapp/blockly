@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ca.wikipedia.org/wiki/Aritm%C3%A8tica";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Retorna la suma dels dos nombres.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Retorna el quocient dels dos nombres.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Retorna la diferència entre els dos nombres.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Retorna el producte del dos nombres.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Retorna el primer nombre elevat a la potència indicada pel segon nombre.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://ca.wikipedia.org/wiki/Suma";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "limitar %1 entre %2 i %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Limita un nombre perquè estigui entre els límits especificats (inclosos).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "és divisible per";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "és parell";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "és negatiu";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://ca.wikipedia.org/wiki/Residu_%28aritm%C3%A8tica%29";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "residu de %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Retorna el residu de dividir els dos nombres.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ca.wikipedia.org/wiki/Nombre";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Un nombre.";

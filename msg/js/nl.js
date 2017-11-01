@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://nl.wikipedia.org/wiki/Rekenen";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Geeft de som van 2 getallen.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Geeft de gedeelde waarde van twee getallen.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Geeft het verschil van de twee getallen.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Geeft het product terug van de twee getallen.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Geeft het eerste getal tot de macht van het tweede getal.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "beperk %1 van minimaal %2 tot maximaal %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Beperk een getal tussen de twee opgegeven limieten (inclusief).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "is deelbaar door";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "is even";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "is negatief";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://nl.wikipedia.org/wiki/Modulair_rekenen";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "restgetal van %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Geeft het restgetal van het resultaat van de deling van de twee getallen.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://nl.wikipedia.org/wiki/Getal_%28wiskunde%29";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Een getal.";

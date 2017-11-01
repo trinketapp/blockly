@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://hu.wikipedia.org/wiki/Matematikai_m%C5%B1velet";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Két szám összege.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Két szám hányadosa.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Két szám különbsége.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Két szám szorzata.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Az első számnak a második számmal megegyező hatványa.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://hu.wikipedia.org/wiki/JavaScript#Aritmetikai_oper.C3.A1torok";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "korlátozd %1-t %2 és %3 közé";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Egy változó értékének korlátozása a megadott zárt intervallumra.";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "-nek osztója";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "páros";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "negatív";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://hu.wikipedia.org/wiki/Eg%C3%A9szr%C3%A9sz#Als.C3.B3_eg.C3.A9szr.C3.A9sz";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "%1 ÷ %2 maradéka";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Az egész osztás maradékát adja eredméynül.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://hu.wikipedia.org/wiki/Sz%C3%A1m";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Egy szám.";

@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://vi.wikipedia.org/wiki/S%E1%BB%91_h%E1%BB%8Dc";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Hoàn trả tổng của hai con số.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Hoàn trả thương của hai con số.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Hoàn trả hiệu của hai con số.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Hoàn trả tích của hai con số.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Hoàn trả số lũy thừa với số thứ nhất là cơ số và số thứ hai là số mũ.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://vi.wikipedia.org/wiki/Ph%C3%A9p_c%E1%BB%99ng";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "giới hạn %1 không dưới %2 không hơn %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Giới hạn số đầu vào để không dưới số thứ nhất và không hơn số thứ hai.";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "chia hết cho";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "là số chẵn";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "là số âm";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "số dư của %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Chia số thứ nhất cho số thứ hai rồi hoàn trả số dư từ.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://vi.wikipedia.org/wiki/S%E1%BB%91";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Một con số.";

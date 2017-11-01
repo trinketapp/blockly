@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://no.wikipedia.org/wiki/Aritmetikk";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Returnerer summen av to tall.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Returner kvotienten av to tall.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Returner differansen mellom to tall.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Returner produktet av to tall.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Returner det første tallet opphøyd i den andre tallet.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "begrense %1 lav %2 høy %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Begrens et tall til å være mellom de angitte grenseverdiene (inklusiv).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "er delelig med";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "er et partall";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "er negativer negativt";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "resten av %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Returner resten fra delingen av to tall.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "x";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://en.wikipedia.org/wiki/Number";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Et tall.";
@@ -281,7 +285,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Returner cosinus av en vinkel (ikke radian).";
 /** @export */ Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Returner sinus av en vinkel (ikke radian).";
 /** @export */ Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Returner tangenten av en vinkel (ikke radian).";
-/** @export */ Blockly.Msg.NEW_VARIABLE = "Opprett variabel...";
+/** @export */ Blockly.Msg.NEW_VARIABLE = "Opprett variabel…";
 /** @export */ Blockly.Msg.NEW_VARIABLE_TITLE = "Nytt variabelnavn:";
 /** @export */ Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";
 /** @export */ Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "tillat uttalelser";
@@ -292,7 +296,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Kjør den brukerdefinerte funksjonen'%1' og bruk resultatet av den.";
 /** @export */ Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "med:";
 /** @export */ Blockly.Msg.PROCEDURES_CREATE_DO = "Opprett '%1'";
-/** @export */ Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT = "Beskriv denne funksjonen...";
+/** @export */ Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT = "Beskriv denne funksjonen…";
 /** @export */ Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 /** @export */ Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 /** @export */ Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE = "gjør noe";
@@ -313,7 +317,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.PROCEDURE_ALREADY_EXISTS = "En prosedyre med navn «%1» finnes allerede.";
 /** @export */ Blockly.Msg.REDO = "Gjør om";
 /** @export */ Blockly.Msg.REMOVE_COMMENT = "Fjern kommentar";
-/** @export */ Blockly.Msg.RENAME_VARIABLE = "Gi nytt navn til variabel...";
+/** @export */ Blockly.Msg.RENAME_VARIABLE = "Gi nytt navn til variabel…";
 /** @export */ Blockly.Msg.RENAME_VARIABLE_TITLE = "Endre navnet til alle '%1' variabler til:";
 /** @export */ Blockly.Msg.TEXT_APPEND_HELPURL = "https://github.com/google/blockly/wiki/Text#text-modification";  // untranslated
 /** @export */ Blockly.Msg.TEXT_APPEND_TITLE = "til %1, legg til teksten %2";
@@ -357,7 +361,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.TEXT_ISEMPTY_TITLE = "%1 er tom";
 /** @export */ Blockly.Msg.TEXT_ISEMPTY_TOOLTIP = "Returnerer sann hvis den angitte teksten er tom.";
 /** @export */ Blockly.Msg.TEXT_JOIN_HELPURL = "https://github.com/google/blockly/wiki/Text#text-creation";  // untranslated
-/** @export */ Blockly.Msg.TEXT_JOIN_TITLE_CREATEWITH = "lage tekst med";
+/** @export */ Blockly.Msg.TEXT_JOIN_TITLE_CREATEWITH = "lag tekst med";
 /** @export */ Blockly.Msg.TEXT_JOIN_TOOLTIP = "Opprett en tekst ved å sette sammen et antall elementer.";
 /** @export */ Blockly.Msg.TEXT_LENGTH_HELPURL = "https://github.com/google/blockly/wiki/Text#text-modification";  // untranslated
 /** @export */ Blockly.Msg.TEXT_LENGTH_TITLE = "lengden av %1";

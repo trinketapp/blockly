@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://it.wikipedia.org/wiki/Aritmetica";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Restituisce la somma dei due numeri.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Restituisce il quoziente dei due numeri.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Restituisce la differenza dei due numeri.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Restituisce il prodotto dei due numeri.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Restituisce il primo numero elevato alla potenza del secondo numero.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://it.wikipedia.org/wiki/Addizione";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "costringi %1 da %2 a %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Costringe un numero all'interno dei limiti indicati (compresi).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "è divisibile per";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "è pari";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "è negativo";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://it.wikipedia.org/wiki/Resto";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "resto di %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Restituisce il resto della divisione di due numeri.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://it.wikipedia.org/wiki/Numero";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Un numero.";

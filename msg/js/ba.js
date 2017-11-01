@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ba.wikipedia.org/wiki/Арифметика";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Ике һандың суммаһын ҡайтара.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Ике һандың бүлендеген ҡайтара.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Ике һандың айырмаһын ҡайтара.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Ике һандың ҡабатландығын ҡайтара.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Дәрәжәгә күтәрелгән икенсе һандан тәүгеһенә ҡайтара.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://ba.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "сикләргә %1 аҫтан %2 өҫтән %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Һанды аҫтан һәм өҫтән сикләй (сиктәгеләрен индереп).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "бүленә";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "тағы";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "тиҫкәре";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://ba.wikipedia.org/wiki/Ҡалдыҡ_менән_бүлеү";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "ҡалдыҡ %1 : %2 араһында";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Ике һанды бүлеү ҡалдығын күрһәтә.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ba.wikipedia.org/wiki/Һан";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Рәт.";

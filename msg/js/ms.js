@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://ms.wikipedia.org/wiki/Aritmetik";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Kembalikan jumlah kedua-dua bilangan.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Taip balik hasil bahagi dua nombor tersebut.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Taip balik hasil tolak dua nombor tersebut.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Taip balik hasil darab dua nombor tersebut.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Return the first number raised to the power of the second number.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://id.wikipedia.org/wiki/Perjumlahan";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "constrain %1 low %2 high %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Constrain a number to be between the specified limits (inclusive).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "Boleh dibahagikan dengan";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "Adalah genap";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "negatif";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://id.wikipedia.org/wiki/Operasi_modulus";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "remainder of %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Taip balik baki yang didapat daripada pembahagian dua nombor tersebut.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://ms.wikipedia.org/wiki/Nombor";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Suatu nombor.";

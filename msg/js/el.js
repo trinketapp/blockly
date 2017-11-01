@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://el.wikipedia.org/wiki/%CE%91%CF%81%CE%B9%CE%B8%CE%BC%CE%B7%CF%84%CE%B9%CE%BA%CE%AE";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "Επιστρέφει το άθροισμα των δύο αριθμών.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "Επιστρέφει το πηλίκο των δύο αριθμών.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "Επιστρέφει τη διαφορά των δύο αριθμών.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "Επιστρέφει το γινόμενο των δύο αριθμών.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "Επιστρέφει τον πρώτο αριθμό υψωμένο στη δύναμη του δεύτερου αριθμού.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://el.wikipedia.org/wiki/%CE%A0%CF%81%CF%8C%CF%83%CE%B8%CE%B5%CF%83%CE%B7";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "περιόρισε %1 χαμηλή %2 υψηλή %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "Περιορίζει έναν αριθμό μεταξύ των προβλεπόμενων ορίων (χωρίς αποκλεισμούς).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "είναι διαιρετός από το";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "είναι άρτιος";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "είναι αρνητικός";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://en.wikipedia.org/wiki/Modulo_operation";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "υπόλοιπο της %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "Επιστρέφει το υπόλοιπο της διαίρεσης των δύο αριθμών.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://el.wikipedia.org/wiki/%CE%91%CF%81%CE%B9%CE%B8%CE%BC%CF%8C%CF%82";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "Ένας αριθμός.";

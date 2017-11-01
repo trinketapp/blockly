@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://zh.wikipedia.org/wiki/算术";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "返回两个数字的和。";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "返回两个数字的商。";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "返回两个数字的区别。";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "返回两个数字的乘积。";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "返回第一个数的第二个数次幂。";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://zh.wikipedia.org/wiki/加法";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "限制数字 %1 介于 (低) %2 到 (高) %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "限制数字介于两个指定的数字之间";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "可被整除";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "是偶数";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "为负";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://zh.wikipedia.org/wiki/模除";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "取余数自 %1 ÷ %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "返回这两个数字相除后的余数。";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://zh.wikipedia.org/wiki/数";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "一个数字。";

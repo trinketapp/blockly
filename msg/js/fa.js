@@ -78,8 +78,8 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.IOS_ERROR = "خطا";
 /** @export */ Blockly.Msg.IOS_OK = "تأیید";
 /** @export */ Blockly.Msg.IOS_PROCEDURES_ADD_INPUT = "+ افزودن ورودی";
-/** @export */ Blockly.Msg.IOS_PROCEDURES_ALLOW_STATEMENTS = "Allow statements";  // untranslated
-/** @export */ Blockly.Msg.IOS_PROCEDURES_DUPLICATE_INPUTS_ERROR = "This function has duplicate inputs.";  // untranslated
+/** @export */ Blockly.Msg.IOS_PROCEDURES_ALLOW_STATEMENTS = "اجازه اظهارات";
+/** @export */ Blockly.Msg.IOS_PROCEDURES_DUPLICATE_INPUTS_ERROR = "این تابع دارای ورودی‌های تکراری است.";
 /** @export */ Blockly.Msg.IOS_PROCEDURES_INPUTS = "ورودی‌ها";
 /** @export */ Blockly.Msg.IOS_VARIABLES_ADD_BUTTON = "افزودن";
 /** @export */ Blockly.Msg.IOS_VARIABLES_ADD_VARIABLE = "+ افزودن متغیر";
@@ -144,7 +144,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.LISTS_REPEAT_TOOLTIP = "فهرستی شامل مقادیر داده‌شدهٔ تکرار شده عدد مشخص‌شده می‌سازد.";
 /** @export */ Blockly.Msg.LISTS_REVERSE_HELPURL = "https://github.com/google/blockly/wiki/Lists#reversing-a-list";  // untranslated
 /** @export */ Blockly.Msg.LISTS_REVERSE_MESSAGE0 = "معکوس %1";
-/** @export */ Blockly.Msg.LISTS_REVERSE_TOOLTIP = "Reverse a copy of a list.";  // untranslated
+/** @export */ Blockly.Msg.LISTS_REVERSE_TOOLTIP = "یک کپی از لیست را معکوس کنید.";
 /** @export */ Blockly.Msg.LISTS_SET_INDEX_HELPURL = "https://github.com/google/blockly/wiki/Lists#in-list--set";  // untranslated
 /** @export */ Blockly.Msg.LISTS_SET_INDEX_INPUT_TO = "به عنوان";
 /** @export */ Blockly.Msg.LISTS_SET_INDEX_INSERT = "درج در";
@@ -161,7 +161,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.LISTS_SORT_ORDER_ASCENDING = "صعودی";
 /** @export */ Blockly.Msg.LISTS_SORT_ORDER_DESCENDING = "نزولی";
 /** @export */ Blockly.Msg.LISTS_SORT_TITLE = "sort %1 %2 %3";  // untranslated
-/** @export */ Blockly.Msg.LISTS_SORT_TOOLTIP = "Sort a copy of a list.";  // untranslated
+/** @export */ Blockly.Msg.LISTS_SORT_TOOLTIP = "یک کپی از لیست را مرتب کنید.";
 /** @export */ Blockly.Msg.LISTS_SORT_TYPE_IGNORECASE = "حروفی ، رد کردن مورد";
 /** @export */ Blockly.Msg.LISTS_SORT_TYPE_NUMERIC = "عددی";
 /** @export */ Blockly.Msg.LISTS_SORT_TYPE_TEXT = "حروفی ، الفبایی";
@@ -202,7 +202,9 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_HELPURL = "https://fa.wikipedia.org/wiki/%D8%AD%D8%B3%D8%A7%D8%A8";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_ADD = "بازگرداندن مقدار جمع دو عدد.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_DIVIDE = "بازگرداندن باقی‌ماندهٔ دو عدد.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_FLOOR_DIVISION = "Return the quotient of the two numbers with decimals removed.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MINUS = "بازگرداندن تفاوت دو عدد.";
+/** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MODULUS = "Return the remainder after dividing the two numbers.";  // untranslated
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_MULTIPLY = "بازگرداندن حاصلضرب دو عدد.";
 /** @export */ Blockly.Msg.MATH_ARITHMETIC_TOOLTIP_POWER = "بازگرداندن اولین عددی که از توان عدد دوم حاصل شده باشد.";
 /** @export */ Blockly.Msg.MATH_CHANGE_HELPURL = "https://fa.wikipedia.org/wiki/%D8%A7%D8%B5%D8%B7%D9%84%D8%A7%D8%AD_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87%E2%80%8C%D9%86%D9%88%DB%8C%D8%B3%DB%8C#.D8.A7.D9.81.D8.B2.D8.A7.DB.8C.D8.B4_.D8.B4.D9.85.D8.A7.D8.B1.D9.86.D8.AF.D9.87";
@@ -214,6 +216,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TITLE = "محدودکردن %1 پایین %2 بالا %3";
 /** @export */ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = "محدودکردن یک عدد بین محدودیت‌های مشخص‌شده (بسته).";
 /** @export */ Blockly.Msg.MATH_DIVISION_SYMBOL = "÷";  // untranslated
+/** @export */ Blockly.Msg.MATH_FLOOR_DIVISION_SYMBOL = "//";  // untranslated
 /** @export */ Blockly.Msg.MATH_IS_DIVISIBLE_BY = "تقسیم شده بر";
 /** @export */ Blockly.Msg.MATH_IS_EVEN = "زوج است";
 /** @export */ Blockly.Msg.MATH_IS_NEGATIVE = "منفی است";
@@ -225,6 +228,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.MATH_MODULO_HELPURL = "https://fa.wikipedia.org/wiki/%D8%B9%D9%85%D9%84%DB%8C%D8%A7%D8%AA_%D9%BE%DB%8C%D9%85%D8%A7%D9%86%D9%87";
 /** @export */ Blockly.Msg.MATH_MODULO_TITLE = "باقی‌ماندهٔ %1 + %2";
 /** @export */ Blockly.Msg.MATH_MODULO_TOOLTIP = "باقی‌ماندهٔ تقسیم دو عدد را بر می‌گرداند.";
+/** @export */ Blockly.Msg.MATH_MODULUS_SYMBOL = "%";  // untranslated
 /** @export */ Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = "×";  // untranslated
 /** @export */ Blockly.Msg.MATH_NUMBER_HELPURL = "https://fa.wikipedia.org/wiki/%D8%B9%D8%AF%D8%AF";
 /** @export */ Blockly.Msg.MATH_NUMBER_TOOLTIP = "یک عدد.";
@@ -310,7 +314,7 @@ goog.require('Blockly.Msg');
 /** @export */ Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "اضافه کردن ورودی به تابع.";
 /** @export */ Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "ورودی‌ها";
 /** @export */ Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "افزودن، حذف یا دوباره مرتب‌کردن ورودی این تابع.";
-/** @export */ Blockly.Msg.PROCEDURE_ALREADY_EXISTS = "A procedure named '%1' already exists.";  // untranslated
+/** @export */ Blockly.Msg.PROCEDURE_ALREADY_EXISTS = "پروسیجری با نام '%1' هم اکنون وجود دارد.";
 /** @export */ Blockly.Msg.REDO = "انجام دوباره";
 /** @export */ Blockly.Msg.REMOVE_COMMENT = "حذف نظر";
 /** @export */ Blockly.Msg.RENAME_VARIABLE = "تغییر نام متغیر...";
