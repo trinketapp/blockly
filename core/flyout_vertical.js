@@ -30,10 +30,8 @@ goog.require('Blockly.Block');
 goog.require('Blockly.Events');
 goog.require('Blockly.Flyout');
 goog.require('Blockly.FlyoutButton');
-goog.require('Blockly.utils');
 goog.require('Blockly.WorkspaceSvg');
-goog.require('goog.dom');
-goog.require('goog.events');
+
 goog.require('goog.math.Rect');
 goog.require('goog.userAgent');
 
@@ -125,7 +123,7 @@ Blockly.VerticalFlyout.prototype.setMetrics_ = function(xyRatio) {
   if (!metrics) {
     return;
   }
-  if (goog.isNumber(xyRatio.y)) {
+  if (typeof xyRatio.y == 'number') {
     this.workspace_.scrollY = -metrics.contentHeight * xyRatio.y;
   }
   this.workspace_.translate(this.workspace_.scrollX + metrics.absoluteLeft,
@@ -155,6 +153,9 @@ Blockly.VerticalFlyout.prototype.position = function() {
   var x = targetWorkspaceMetrics.absoluteLeft;
   if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT) {
     x += (targetWorkspaceMetrics.viewWidth - this.width_);
+    // Save the location of the left edge of the flyout, for use when Firefox
+    // gets the bounding client rect wrong.
+    this.leftEdge_ = x;
   }
   this.positionAt_(this.width_, this.height_, x, y);
 };
@@ -188,7 +189,7 @@ Blockly.VerticalFlyout.prototype.setBackgroundPath_ = function(width, height) {
       atRight ? this.CORNER_RADIUS : -this.CORNER_RADIUS,
       this.CORNER_RADIUS);
   // Bottom.
-  path.push('h',  atRight ? width : -width);
+  path.push('h', atRight ? width : -width);
   path.push('z');
   this.svgBackground_.setAttribute('d', path.join(' '));
 };
@@ -209,12 +210,13 @@ Blockly.VerticalFlyout.prototype.wheel_ = function(e) {
   var delta = e.deltaY;
 
   if (delta) {
-    if (goog.userAgent.GECKO) {
-      // Firefox's deltas are a tenth that of Chrome/Safari.
+    // Firefox's mouse wheel deltas are a tenth that of Chrome/Safari.
+    // DeltaMode is 1 for a mouse wheel, but not for a trackpad scroll event
+    if (goog.userAgent.GECKO && (e.deltaMode === 1)) {
       delta *= 10;
     }
     var metrics = this.getMetrics_();
-    var pos = metrics.viewTop + delta;
+    var pos = (metrics.viewTop - metrics.contentTop) + delta;
     var limit = metrics.contentHeight - metrics.viewHeight;
     pos = Math.min(pos, limit);
     pos = Math.max(pos, 0);
@@ -244,7 +246,7 @@ Blockly.VerticalFlyout.prototype.layout_ = function(contents, gaps) {
   for (var i = 0, item; item = contents[i]; i++) {
     if (item.type == 'block') {
       var block = item.block;
-      var allBlocks = block.getDescendants();
+      var allBlocks = block.getDescendants(false);
       for (var j = 0, child; child = allBlocks[j]; j++) {
         // Mark blocks as being inside a flyout.  This is used to detect and
         // prevent the closure of the flyout if the user right-clicks on such a
@@ -286,100 +288,12 @@ Blockly.VerticalFlyout.prototype.isDragTowardWorkspace = function(
   var dragDirection = Math.atan2(dy, dx) / Math.PI * 180;
 
   var range = this.dragAngleRange_;
-  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_LEFT) {
-    // Vertical at left.
-    if (dragDirection < range && dragDirection > -range) {
-      return true;
-    }
-  } else {
-    // Vertical at right.
-    if (dragDirection < -180 + range || dragDirection > 180 - range) {
-      return true;
-    }
+  // Check for left or right dragging.
+  if ((dragDirection < range && dragDirection > -range) ||
+      (dragDirection < -180 + range || dragDirection > 180 - range)) {
+    return true;
   }
   return false;
-};
-
-/**
- * Copy a block from the flyout to the workspace and position it correctly.
- * @param {!Blockly.Block} originBlock The flyout block to copy.
- * @return {!Blockly.Block} The new block in the main workspace.
- * @private
- */
-Blockly.VerticalFlyout.prototype.placeNewBlock_ = function(originBlock) {
-  var targetWorkspace = this.targetWorkspace_;
-  var svgRootOld = originBlock.getSvgRoot();
-  if (!svgRootOld) {
-    throw 'originBlock is not rendered.';
-  }
-  // Figure out where the original block is on the screen, relative to the upper
-  // left corner of the main workspace.
-  if (targetWorkspace.isMutator) {
-    var xyOld = this.workspace_.getSvgXY(/** @type {!Element} */ (svgRootOld));
-  } else {
-    var xyOld = Blockly.utils.getInjectionDivXY_(svgRootOld);
-  }
-
-  // Take into account that the flyout might have been scrolled horizontally
-  // (separately from the main workspace).
-  // Generally a no-op in vertical mode but likely to happen in horizontal
-  // mode.
-  var scrollX = this.workspace_.scrollX;
-  var scale = this.workspace_.scale;
-  xyOld.x += scrollX / scale - scrollX;
-
-  var targetMetrics = targetWorkspace.getMetrics();
-
-  // If the flyout is on the right side, (0, 0) in the flyout is offset to
-  // the right of (0, 0) in the main workspace.  Add an offset to take that
-  // into account.
-  var scrollX = 0;
-  if (this.toolboxPosition_ == Blockly.TOOLBOX_AT_RIGHT) {
-    scrollX = targetMetrics.viewWidth - this.width_;
-    // Scale the scroll (getSvgXY_ did not do this).
-    xyOld.x += scrollX / scale - scrollX;
-  }
-
-  // Take into account that the flyout might have been scrolled vertically
-  // (separately from the main workspace).
-  // Generally a no-op in horizontal mode but likely to happen in vertical
-  // mode.
-  var scrollY = this.workspace_.scrollY;
-  scale = this.workspace_.scale;
-  xyOld.y += scrollY / scale - scrollY;
-
-  // Create the new block by cloning the block in the flyout (via XML).
-  var xml = Blockly.Xml.blockToDom(originBlock);
-  var block = Blockly.Xml.domToBlock(xml, targetWorkspace);
-  var svgRootNew = block.getSvgRoot();
-  if (!svgRootNew) {
-    throw 'block is not rendered.';
-  }
-  // Figure out where the new block got placed on the screen, relative to the
-  // upper left corner of the workspace.  This may not be the same as the
-  // original block because the flyout's origin may not be the same as the
-  // main workspace's origin.
-  if (targetWorkspace.isMutator) {
-    var xyNew = targetWorkspace.getSvgXY(/* @type {!Element} */(svgRootNew));
-  } else {
-    var xyNew = Blockly.utils.getInjectionDivXY_(svgRootNew);
-  }
-
-  // Scale the scroll (getSvgXY_ did not do this).
-  xyNew.x +=
-      targetWorkspace.scrollX / targetWorkspace.scale - targetWorkspace.scrollX;
-  xyNew.y +=
-      targetWorkspace.scrollY / targetWorkspace.scale - targetWorkspace.scrollY;
-
-  // If the flyout is collapsible and the workspace can't be scrolled.
-  if (targetWorkspace.toolbox_ && !targetWorkspace.scrollbar) {
-    xyNew.x += targetWorkspace.toolbox_.getWidth() / targetWorkspace.scale;
-    xyNew.y += targetWorkspace.toolbox_.getHeight() / targetWorkspace.scale;
-  }
-
-  // Move the new block to where the old block is.
-  block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
-  return block;
 };
 
 /**
@@ -403,19 +317,43 @@ Blockly.VerticalFlyout.prototype.getClientRect = function() {
     return new goog.math.Rect(x - BIG_NUM, -BIG_NUM, BIG_NUM + width,
         BIG_NUM * 2);
   } else {  // Right
+    // Firefox sometimes reports the wrong value for the client rect.
+    // See https://github.com/google/blockly/issues/1425 and
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=1066435
+    if (goog.userAgent.GECKO &&
+        this.targetWorkspace_ && this.targetWorkspace_.isMutator) {
+      // The position of the left side of the mutator workspace in pixels
+      // relative to the window origin.
+      var targetWsLeftPixels =
+          this.targetWorkspace_.svgGroup_.getBoundingClientRect().x;
+      // The client rect is in pixels relative to the window origin.  When the
+      // browser gets the wrong value it reports that the flyout left is the
+      // same as the mutator workspace left.
+      // We know that in a mutator workspace with the flyout on the right, the
+      // visible area of the workspace should be more than ten pixels wide.  If
+      // the browser reports that the flyout is within ten pixels of the left
+      // side of the workspace, ignore it and manually calculate the value.
+      if (Math.abs(targetWsLeftPixels - x) < 10) {
+        // If we're in a mutator, its scale is always 1, purely because of some
+        // oddities in our rendering optimizations.  The actual scale is the
+        // same as the scale on the parent workspace.
+        var scale = this.targetWorkspace_.options.parentWorkspace.scale;
+        x = x + this.leftEdge_ * scale;
+      }
+    }
     return new goog.math.Rect(x, -BIG_NUM, BIG_NUM + width, BIG_NUM * 2);
   }
 };
 
 /**
- * Compute width of flyout.  Position button under each block.
- * For RTL: Lay out the blocks right-aligned.
- * @param {!Array<!Blockly.Block>} blocks The blocks to reflow.
+ * Compute width of flyout.  Position mat under each block.
+ * For RTL: Lay out the blocks and buttons to be right-aligned.
  * @private
  */
-Blockly.VerticalFlyout.prototype.reflowInternal_ = function(blocks) {
+Blockly.VerticalFlyout.prototype.reflowInternal_ = function() {
   this.workspace_.scale = this.targetWorkspace_.scale;
   var flyoutWidth = 0;
+  var blocks = this.workspace_.getTopBlocks(false);
   for (var i = 0, block; block = blocks[i]; i++) {
     var width = block.getHeightWidth().width;
     if (block.outputConnection) {
@@ -435,12 +373,21 @@ Blockly.VerticalFlyout.prototype.reflowInternal_ = function(blocks) {
       if (this.RTL) {
         // With the flyoutWidth known, right-align the blocks.
         var oldX = block.getRelativeToSurfaceXY().x;
-        var newX = flyoutWidth / this.workspace_.scale - this.MARGIN;
-        newX -= Blockly.BlockSvg.TAB_WIDTH;
+        var newX = flyoutWidth / this.workspace_.scale - this.MARGIN -
+            Blockly.BlockSvg.TAB_WIDTH;
         block.moveBy(newX - oldX, 0);
       }
       if (block.flyoutRect_) {
         this.moveRectToBlock_(block.flyoutRect_, block);
+      }
+    }
+    if (this.RTL) {
+      // With the flyoutWidth known, right-align the buttons.
+      for (var i = 0, button; button = this.buttons_[i]; i++) {
+        var y = button.getPosition().y;
+        var x = flyoutWidth / this.workspace_.scale - button.width - this.MARGIN -
+            Blockly.BlockSvg.TAB_WIDTH;
+        button.moveTo(x, y);
       }
     }
     // Record the width for .getMetrics_ and .position.

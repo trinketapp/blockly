@@ -70,13 +70,14 @@
 <script src="../../blocks/colour.js"></script>
 <script src="../../blocks/variables.js"></script>
 <script src="../../blocks/procedures.js"></script>
+
 <script>
 'use strict';
 
-var workspace = null;
+var demoWorkspace = null;
 
 function start() {
-  workspace = Blockly.inject('blocklyDiv',
+  demoWorkspace = Blockly.inject('blocklyDiv',
       {grid:
          {spacing: 25,
           length: 3,
@@ -87,6 +88,38 @@ function start() {
        zoom: {controls: true, wheel: true}
        });
   changeIndex();
+}
+
+/*
+ * Run this test to load all of the test files in all_test_names.  The contents
+ * will be loaded into the workspace in order.  To test the generators:
+ * - select your language from the buttons above the text area
+ * - copy all of the generated code
+ * - run it in an interpreter of your choice
+ * - scan all of the results for "FAIL".  All test suites are running in order,
+ *      and each will report OK or FAIL based only on the tests in that suite.
+ * If some tests are failing, load test suites individually to continue
+ * debugging.
+ */
+function loadAll() {
+  var output = document.getElementById('importExport');
+  output.style.background = 'gray';
+
+  var loadingElem = document.getElementById('loading');
+  loadingElem.textContent = 'loading...';
+
+  var options = document.getElementById('testUrl').options;
+  for (var i = 0; i < options.length; i++) {
+    var testUrl = options[i].value;
+    if (testUrl) {
+      var xmlText = fetchFile(testUrl);
+      if (xmlText !== null) {
+        fromXml(testUrl, xmlText, /* opt_append */ true);
+      }
+    }
+  }
+  output.style.background = '';
+  loadingElem.textContent = 'done';
 }
 
 function loadXml() {
@@ -100,7 +133,7 @@ function loadXml() {
   }
   var xmlText = fetchFile(url);
   if (xmlText !== null) {
-    fromXml(xmlText);
+    fromXml(url, xmlText);
   }
 }
 
@@ -124,19 +157,36 @@ function fetchFile(xmlUrl) {
   return xmlHttp.responseText;
 }
 
-function fromXml(xmlText) {
+/**
+ * @param {string} filename The URL (or other name) of the XML, for reporting.
+ * @param {string} xmlText The actual XML text.
+ * @param {boolean=} opt_append True if the XML should be appended to the
+ *     workspace.  Otherwise the workspace is cleared and the new XML is loaded.
+ */
+function fromXml(filename, xmlText, opt_append) {
   var output = document.getElementById('importExport');
   output.value = xmlText;
   output.scrollTop = 0;
   output.scrollLeft = 0;
-  workspace.clear();
+  if (!opt_append) {
+    demoWorkspace.clear();
+  }
   try {
     var xmlDoc = Blockly.Xml.textToDom(xmlText);
+    if (opt_append) {
+      Blockly.Xml.appendDomToWorkspace(xmlDoc, demoWorkspace);
+    } else {
+      Blockly.Xml.domToWorkspace(xmlDoc, demoWorkspace);
+    }
   } catch (e) {
-    alert('Error parsing XML:\n' + e);
+    var msg = 'Error parsing XML: ' + filename + '\n\n\t' + e;
+    if (e.stack) {
+      msg += '\n\nSee console for stack trace details.'
+    }
+    console.error(e.stack ? e : msg);
+    alert(msg);
     return;
   }
-  Blockly.Xml.domToWorkspace(xmlDoc, workspace);
 }
 
 function setOutput(text) {
@@ -147,7 +197,8 @@ function setOutput(text) {
 }
 
 function toXml() {
-  var xmlDom = Blockly.Xml.workspaceToDom(workspace, /* opt_noId */ true);
+  var xmlDom = Blockly.Xml.workspaceToDom(demoWorkspace,
+    /* opt_noId */ true);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   xmlText = xmlText.replace(/ id="\d+"/g, '');
   setOutput(xmlText);
@@ -155,34 +206,34 @@ function toXml() {
 
 function toJavaScript() {
   var code = '\'use strict\';\n\n'
-  code += Blockly.JavaScript.workspaceToCode(workspace);
+  code += Blockly.JavaScript.workspaceToCode(demoWorkspace);
   setOutput(code);
 }
 
 function toPython() {
-  var code = Blockly.Python.workspaceToCode(workspace);
+  var code = Blockly.Python.workspaceToCode(demoWorkspace);
   setOutput(code);
 }
 
 function toPhp() {
-  var code = Blockly.PHP.workspaceToCode(workspace);
+  var code = Blockly.PHP.workspaceToCode(demoWorkspace);
   setOutput(code);
 }
 
 function toLua() {
-  var code = Blockly.Lua.workspaceToCode(workspace);
+  var code = Blockly.Lua.workspaceToCode(demoWorkspace);
   setOutput(code);
 }
 
 function toDart() {
-  var code = Blockly.Dart.workspaceToCode(workspace);
+  var code = Blockly.Dart.workspaceToCode(demoWorkspace);
   setOutput(code);
 }
 
 function changeIndex() {
   var oneBasedIndex = document.getElementById('indexing').checked;
-  workspace.options.oneBasedIndex = oneBasedIndex;
-  workspace.toolbox_.flyout_.workspace_.options.oneBasedIndex = oneBasedIndex;
+  demoWorkspace.options.oneBasedIndex = oneBasedIndex;
+  demoWorkspace.toolbox_.flyout_.workspace_.options.oneBasedIndex = oneBasedIndex;
 }
 </script>
 
@@ -209,6 +260,9 @@ h1 {
 #importExport {
   height: 100%;
   width: 100%;
+}
+#loading {
+  color: red;
 }
 </style>
 </head>
@@ -332,6 +386,11 @@ h1 {
     </p>
 
     <p>
+      <input type="button" value="Load all" id="loadAllBtn" onclick="loadAll()">
+      <label for="loadAllBtn" id="loading"></label>
+    </p>
+
+    <p>
       <input id="indexing" type="checkbox" onchange="changeIndex()" checked>
       <label for="indexing">Generate with one-based indexing</label>
     </p>
@@ -353,7 +412,7 @@ h1 {
       </div>
       <div style="display: inline-block;">
         <input type="button" value="Lua" onclick="toLua()">
-        <br><a target="_blank" href="https://repl.it/languages/lua">interpreter</a>
+        <br><a target="_blank" href="http://rextester.com/l/lua_online_compiler">interpreter</a>
       </div>
       <div style="display: inline-block;">
         <input type="button" value="Dart" onclick="toDart()">

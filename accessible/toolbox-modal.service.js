@@ -71,7 +71,7 @@ blocklyApp.ToolboxModalService = ng.core.Class({
       this.allToolboxCategories = Array.from(toolboxCategoryElts).map(
         function(categoryElt) {
           var tmpWorkspace = new Blockly.Workspace();
-          var custom = categoryElt.attributes.custom
+          var custom = categoryElt.attributes.custom;
           // TODO (corydiers): Implement custom flyouts once #1153 is solved.
           if (custom && custom.value == Blockly.VARIABLE_CATEGORY_NAME) {
             var varBlocks =
@@ -90,24 +90,20 @@ blocklyApp.ToolboxModalService = ng.core.Class({
       );
       this.computeCategoriesForCreateNewGroupModal_();
     } else {
-      // A timeout seems to be needed in order for the .children accessor to
-      // work correctly.
       var that = this;
-      setTimeout(function() {
-        // If there are no top-level categories, we create a single category
-        // containing all the top-level blocks.
-        var tmpWorkspace = new Blockly.Workspace();
-        Array.from(toolboxXmlElt.children).forEach(function(topLevelNode) {
-          Blockly.Xml.domToBlock(tmpWorkspace, topLevelNode);
-        });
-
-        that.allToolboxCategories = [{
-          categoryName: '',
-          blocks: tmpWorkspace.topBlocks_
-        }];
-
-        that.computeCategoriesForCreateNewGroupModal_();
+      // If there are no top-level categories, we create a single category
+      // containing all the top-level blocks.
+      var tmpWorkspace = new Blockly.Workspace();
+      Array.from(toolboxXmlElt.children).forEach(function(topLevelNode) {
+        Blockly.Xml.domToBlock(topLevelNode, tmpWorkspace);
       });
+
+      that.allToolboxCategories = [{
+        categoryName: '',
+        blocks: tmpWorkspace.topBlocks_
+      }];
+
+      that.computeCategoriesForCreateNewGroupModal_();
     }
   },
   computeCategoriesForCreateNewGroupModal_: function() {
@@ -218,7 +214,7 @@ blocklyApp.ToolboxModalService = ng.core.Class({
     this.showModal_(this.toolboxCategoriesForNewGroup, function(block) {
       var blockDescription = that.utilsService.getBlockDescription(block);
       var xml = Blockly.Xml.blockToDom(block);
-      var newBlockId = Blockly.Xml.domToBlock(blocklyApp.workspace, xml).id;
+      var newBlockId = Blockly.Xml.domToBlock(xml, blocklyApp.workspace).id;
 
       // Invoke a digest cycle, so that the DOM settles.
       setTimeout(function() {

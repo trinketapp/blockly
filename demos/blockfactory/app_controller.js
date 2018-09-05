@@ -25,16 +25,8 @@
  *
  * @author quachtina96 (Tina Quach)
  */
-goog.provide('AppController');
 
-goog.require('BlockFactory');
-goog.require('FactoryUtils');
-goog.require('BlockLibraryController');
-goog.require('BlockExporterController');
-goog.require('goog.dom.classlist');
-goog.require('goog.ui.PopupColorPicker');
-goog.require('goog.ui.ColorPicker');
-
+goog.require('goog.dom.xml');  // Used to detect Closure
 
 /**
  * Controller for the Blockly Factory
@@ -85,6 +77,10 @@ AppController.prototype.importBlockLibraryFromFile = function() {
   var files = document.getElementById('files');
   // If the file list is empty, the user likely canceled in the dialog.
   if (files.files.length > 0) {
+    BlocklyDevTools.Analytics.onImport(
+        BlocklyDevTools.Analytics.BLOCK_FACTORY_LIBRARY,
+        { format: BlocklyDevTools.Analytics.FORMAT_XML });
+
     // The input tag doesn't have the "multiple" attribute
     // so the user can only choose 1 file.
     var file = files.files[0];
@@ -137,9 +133,14 @@ AppController.prototype.exportBlockLibraryToFile = function() {
   // Download file if all necessary parameters are provided.
   if (filename) {
     FactoryUtils.createAndDownloadFile(blockLibText, filename, 'xml');
+    BlocklyDevTools.Analytics.onExport(
+        BlocklyDevTools.Analytics.BLOCK_FACTORY_LIBRARY,
+        { format: BlocklyDevTools.Analytics.FORMAT_XML });
   } else {
-    alert('Could not export Block Library without file name under which to ' +
-      'save library.');
+    var msg = 'Could not export Block Library without file name under which ' +
+      'to save library.';
+    BlocklyDevTools.Analytics.onWarning(msg);
+    alert(msg);
   }
 };
 
@@ -151,9 +152,7 @@ AppController.prototype.exportBlockLibraryToFile = function() {
  */
 AppController.prototype.formatBlockLibraryForExport_ = function(blockXmlMap) {
   // Create DOM for XML.
-  var xmlDom = goog.dom.createDom('xml', {
-    'xmlns':"http://www.w3.org/1999/xhtml"
-  });
+  var xmlDom = document.createElementNS('http://www.w3.org/1999/xhtml', 'xml');
 
   // Append each block node to XML DOM.
   for (var blockType in blockXmlMap) {
@@ -174,34 +173,30 @@ AppController.prototype.formatBlockLibraryForExport_ = function(blockXmlMap) {
  * @private
  */
 AppController.prototype.formatBlockLibraryForImport_ = function(xmlText) {
-  var xmlDom = Blockly.Xml.textToDom(xmlText);
-
-  // Get array of XMLs. Use an asterisk (*) instead of a tag name for the XPath
-  // selector, to match all elements at that level and get all factory_base
-  // blocks.
-  var blockNodes = goog.dom.xml.selectNodes(xmlDom, '*');
+  var inputXml = Blockly.Xml.textToDom(xmlText);
+  // Convert the live HTMLCollection of child Elements into a static array,
+  // since the addition to editorWorkspaceXml below removes it from inputXml.
+  var inputChildren = Array.from(inputXml.children);
 
   // Create empty map. The line below creates a  truly empy object. It doesn't
   // have built-in attributes/functions such as length or toString.
   var blockXmlTextMap = Object.create(null);
 
   // Populate map.
-  for (var i = 0, blockNode; blockNode = blockNodes[i]; i++) {
-
+  for (var i = 0, blockNode; blockNode = inputChildren[i]; i++) {
     // Add outer XML tag to the block for proper injection in to the
     // main workspace.
     // Create DOM for XML.
-    var xmlDom = goog.dom.createDom('xml', {
-      'xmlns':"http://www.w3.org/1999/xhtml"
-    });
-    xmlDom.appendChild(blockNode);
+    var editorWorkspaceXml =
+        document.createElementNS('http://www.w3.org/1999/xhtml', 'xml');
+    editorWorkspaceXml.appendChild(blockNode);
 
-    xmlText = Blockly.Xml.domToText(xmlDom);
+    xmlText = Blockly.Xml.domToText(editorWorkspaceXml);
     // All block types should be lowercase.
     var blockType = this.getBlockTypeFromXml_(xmlText).toLowerCase();
     // Some names are invalid so fix them up.
     blockType = FactoryUtils.cleanBlockType(blockType);
-    
+
     blockXmlTextMap[blockType] = xmlText;
   }
 
@@ -285,13 +280,17 @@ AppController.prototype.onTab = function() {
 
     var hasUnsavedChanges =
         !FactoryUtils.savedBlockChanges(this.blockLibraryController);
-    if (hasUnsavedChanges &&
-        !confirm('You have unsaved changes in Block Factory.')) {
-      // If the user doesn't want to switch tabs with unsaved changes,
-      // stay on Block Factory Tab.
-      this.setSelected_(AppController.BLOCK_FACTORY);
-      this.lastSelectedTab = AppController.BLOCK_FACTORY;
-      return;
+    if (hasUnsavedChanges) {
+      var msg = 'You have unsaved changes in Block Factory.';
+      var continueAnyway = confirm(msg);
+      BlocklyDevTools.Analytics.onWarning(msg);
+      if (!continueAnyway) {
+        // If the user doesn't want to switch tabs with unsaved changes,
+        // stay on Block Factory Tab.
+        this.setSelected_(AppController.BLOCK_FACTORY);
+        this.lastSelectedTab = AppController.BLOCK_FACTORY;
+        return;
+      }
     }
   }
 
@@ -304,6 +303,8 @@ AppController.prototype.onTab = function() {
   this.styleTabs_();
 
   if (this.selectedTab == AppController.EXPORTER) {
+    BlocklyDevTools.Analytics.onNavigateTo('Exporter');
+
     // Hide other tabs.
     FactoryUtils.hide('workspaceFactoryContent');
     FactoryUtils.hide('blockFactoryContent');
@@ -325,6 +326,8 @@ AppController.prototype.onTab = function() {
     this.exporter.updatePreview();
 
   } else if (this.selectedTab ==  AppController.BLOCK_FACTORY) {
+    BlocklyDevTools.Analytics.onNavigateTo('BlockFactory');
+
     // Hide other tabs.
     FactoryUtils.hide('blockLibraryExporter');
     FactoryUtils.hide('workspaceFactoryContent');
@@ -332,6 +335,9 @@ AppController.prototype.onTab = function() {
     FactoryUtils.show('blockFactoryContent');
 
   } else if (this.selectedTab == AppController.WORKSPACE_FACTORY) {
+    // TODO: differentiate Workspace and Toolbox editor, based on the other tab state.
+    BlocklyDevTools.Analytics.onNavigateTo('WorkspaceFactory');
+
     // Hide other tabs.
     FactoryUtils.hide('blockLibraryExporter');
     FactoryUtils.hide('blockFactoryContent');
@@ -355,9 +361,9 @@ AppController.prototype.onTab = function() {
 AppController.prototype.styleTabs_ = function() {
   for (var tabName in this.tabMap) {
     if (this.selectedTab == tabName) {
-      goog.dom.classlist.addRemove(this.tabMap[tabName], 'taboff', 'tabon');
+      this.tabMap[tabName].classList.replace('taboff', 'tabon');
     } else {
-      goog.dom.classlist.addRemove(this.tabMap[tabName], 'tabon', 'taboff');
+      this.tabMap[tabName].classList.replace('tabon', 'taboff');
     }
   }
 };
@@ -563,9 +569,9 @@ AppController.prototype.addBlockFactoryEventListeners = function() {
   document.getElementById('direction')
       .addEventListener('change', BlockFactory.updatePreview);
   document.getElementById('languageTA')
-      .addEventListener('change', BlockFactory.updatePreview);
+      .addEventListener('change', BlockFactory.manualEdit);
   document.getElementById('languageTA')
-      .addEventListener('keyup', BlockFactory.updatePreview);
+      .addEventListener('keyup', BlockFactory.manualEdit);
   document.getElementById('format')
       .addEventListener('change', BlockFactory.formatChange);
   document.getElementById('language')
@@ -624,12 +630,14 @@ AppController.prototype.onresize = function(event) {
  * @param {!Event} e beforeunload event.
  */
 AppController.prototype.confirmLeavePage = function(e) {
+  BlocklyDevTools.Analytics.sendQueued();
   if ((!BlockFactory.isStarterBlock() &&
       !FactoryUtils.savedBlockChanges(blocklyFactory.blockLibraryController)) ||
       blocklyFactory.workspaceFactoryController.hasUnsavedChanges()) {
 
     var confirmationMessage = 'You will lose any unsaved changes. ' +
         'Are you sure you want to exit this page?';
+    BlocklyDevTools.Analytics.onWarning(confirmationMessage);
     e.returnValue = confirmationMessage;
     return confirmationMessage;
   }

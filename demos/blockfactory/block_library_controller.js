@@ -32,13 +32,6 @@
  */
 'use strict';
 
-goog.provide('BlockLibraryController');
-
-goog.require('BlockLibraryStorage');
-goog.require('BlockLibraryView');
-goog.require('BlockFactory');
-
-
 /**
  * Block Library Controller Class
  * @param {string} blockLibraryName Desired name of Block Library, also used
@@ -47,7 +40,7 @@ goog.require('BlockFactory');
  *    object that allows user to import a block library.
  * @constructor
  */
-BlockLibraryController = function(blockLibraryName, opt_blockLibraryStorage) {
+function BlockLibraryController(blockLibraryName, opt_blockLibraryStorage) {
   this.name = blockLibraryName;
   // Create a new, empty Block Library Storage object, or load existing one.
   this.storage = opt_blockLibraryStorage || new BlockLibraryStorage(this.name);
@@ -110,8 +103,9 @@ BlockLibraryController.prototype.getSelectedBlockType = function() {
  * updating the dropdown and displaying the starter block (factory_base).
  */
 BlockLibraryController.prototype.clearBlockLibrary = function() {
-  var check = confirm('Delete all blocks from library?');
-  if (check) {
+  var msg = 'Delete all blocks from library?';
+  BlocklyDevTools.Analytics.onWarning(msg);
+  if (confirm(msg)) {
     // Clear Block Library Storage.
     this.storage.clear();
     this.storage.saveToLocalStorage();
@@ -133,14 +127,16 @@ BlockLibraryController.prototype.saveToBlockLibrary = function() {
   // If user has not changed the name of the starter block.
   if (blockType == 'block_type') {
     // Do not save block if it has the default type, 'block_type'.
-    alert('You cannot save a block under the name "block_type". Try changing ' +
-        'the name before saving. Then, click on the "Block Library" button ' +
-        'to view your saved blocks.');
+    var msg = 'You cannot save a block under the name "block_type". Try ' +
+        'changing the name before saving. Then, click on the "Block Library"' +
+        ' button to view your saved blocks.';
+    alert(msg);
+    BlocklyDevTools.Analytics.onWarning(msg);
     return;
   }
 
   // Create block XML.
-  var xmlElement = goog.dom.createDom('xml');
+  var xmlElement = document.createElement('xml');
   var block = FactoryUtils.getRootBlock(BlockFactory.mainWorkspace);
   xmlElement.appendChild(Blockly.Xml.blockToDomWithXY(block));
 
@@ -159,6 +155,7 @@ BlockLibraryController.prototype.saveToBlockLibrary = function() {
 
   // Add select handler to the new option.
   this.addOptionSelectHandler(blockType);
+  BlocklyDevTools.Analytics.onSave('Block');
 };
 
 /**

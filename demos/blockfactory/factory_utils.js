@@ -24,15 +24,15 @@
  * Exporter applications within Blockly Factory. Holds functions to generate
  * block definitions and generator stubs and to create and download files.
  *
- * @author fraser@google.com (Neil Fraser), quachtina96 (Tina Quach)
+ * @author fraser@google.com (Neil Fraser), quachtina96 (Tina Quach), JC-Orozco
+ * (Juan Carlos Orozco)
  */
- 'use strict';
+'use strict';
 
 /**
  * Namespace for FactoryUtils.
  */
-goog.provide('FactoryUtils');
-
+var FactoryUtils = FactoryUtils || Object.create(null);
 
 /**
  * Get block definition code for the current block.
@@ -73,10 +73,23 @@ FactoryUtils.cleanBlockType = function(blockType) {
  * Get the generator code for a given block.
  * @param {!Blockly.Block} block Rendered block in preview workspace.
  * @param {string} generatorLanguage 'JavaScript', 'Python', 'PHP', 'Lua',
- *   'Dart'.
+ *     or 'Dart'.
  * @return {string} Generator code for multiple blocks.
  */
 FactoryUtils.getGeneratorStub = function(block, generatorLanguage) {
+  // Build factory blocks from block
+  if (BlockFactory.updateBlocksFlag) {  // TODO: Move this to updatePreview()
+    BlockFactory.mainWorkspace.clear();
+    var xml = BlockDefinitionExtractor.buildBlockFactoryWorkspace(block);
+    Blockly.Xml.domToWorkspace(xml, BlockFactory.mainWorkspace);
+    // Calculate timer to avoid infinite update loops
+    // TODO(#1267): Remove the global variables and any infinite loops.
+    BlockFactory.updateBlocksFlag = false;
+    setTimeout(
+        function() {BlockFactory.updateBlocksFlagDelayed = false;}, 3000);
+  }
+  BlockFactory.lastUpdatedBlock = block; // Variable to share the block value.
+
   function makeVar(root, name) {
     name = name.toLowerCase().replace(/\W/g, '_');
     return '  var ' + root + '_' + name;
@@ -752,7 +765,7 @@ FactoryUtils.getBlockTypeFromJsDefinition = function(blockDef) {
  */
 FactoryUtils.generateCategoryXml = function(blocks, categoryName) {
   // Create category DOM element.
-  var categoryElement = goog.dom.createDom('category');
+  var categoryElement = document.createElement('category');
   categoryElement.setAttribute('name', categoryName);
 
   // For each block, add block element to category.
