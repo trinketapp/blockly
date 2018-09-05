@@ -26,7 +26,8 @@
 
 goog.provide('Blockly.FlyoutButton');
 
-goog.require('goog.dom');
+goog.require('Blockly.utils');
+
 goog.require('goog.math.Coordinate');
 
 
@@ -138,24 +139,32 @@ Blockly.FlyoutButton.prototype.createDom = function() {
   if (!this.isLabel_) {
     // Shadow rectangle (light source does not mirror in RTL).
     var shadow = Blockly.utils.createSvgElement('rect',
-        {'class': 'blocklyFlyoutButtonShadow',
-         'rx': 4, 'ry': 4, 'x': 1, 'y': 1},
-         this.svgGroup_);
+        {
+          'class': 'blocklyFlyoutButtonShadow',
+          'rx': 4, 'ry': 4, 'x': 1, 'y': 1
+        },
+        this.svgGroup_);
   }
   // Background rectangle.
   var rect = Blockly.utils.createSvgElement('rect',
-      {'class': this.isLabel_ ?
-        'blocklyFlyoutLabelBackground' : 'blocklyFlyoutButtonBackground',
-        'rx': 4, 'ry': 4},
+      {
+        'class': this.isLabel_ ?
+            'blocklyFlyoutLabelBackground' : 'blocklyFlyoutButtonBackground',
+        'rx': 4, 'ry': 4
+      },
       this.svgGroup_);
 
   var svgText = Blockly.utils.createSvgElement('text',
-      {'class': this.isLabel_ ? 'blocklyFlyoutLabelText' : 'blocklyText',
-          'x': 0, 'y': 0, 'text-anchor': 'middle'},
+      {
+        'class': this.isLabel_ ? 'blocklyFlyoutLabelText' : 'blocklyText',
+        'x': 0,
+        'y': 0,
+        'text-anchor': 'middle'
+      },
       this.svgGroup_);
-  svgText.textContent = this.text_;
+  svgText.textContent = Blockly.utils.replaceMessageReferences(this.text_);
 
-  this.width = svgText.getComputedTextLength();    
+  this.width = Blockly.Field.getCachedWidth(svgText);
   this.height = 20;  // Can't compute it :(
 
   if (!this.isLabel_) {
@@ -171,8 +180,8 @@ Blockly.FlyoutButton.prototype.createDom = function() {
 
   this.updateTransform_();
 
-  this.mouseUpWrapper_ = Blockly.bindEventWithChecks_(this.svgGroup_, 'mouseup',
-      this, this.onMouseUp_);
+  this.onMouseUpWrapper_ = Blockly.bindEventWithChecks_(
+      this.svgGroup_, 'mouseup', this, this.onMouseUp_);
   return this.svgGroup_;
 };
 
@@ -185,7 +194,7 @@ Blockly.FlyoutButton.prototype.show = function() {
 };
 
 /**
- * Update svg attributes to match internal state.
+ * Update SVG attributes to match internal state.
  * @private
  */
 Blockly.FlyoutButton.prototype.updateTransform_ = function() {
@@ -205,6 +214,15 @@ Blockly.FlyoutButton.prototype.moveTo = function(x, y) {
 };
 
 /**
+ * Location of the button.
+ * @return {!goog.math.Coordinate} x, y coordinates.
+ * @package
+ */
+Blockly.FlyoutButton.prototype.getPosition = function() {
+  return this.position_;
+};
+
+/**
  * Get the button's target workspace.
  * @return {!Blockly.WorkspaceSvg} The target workspace of the flyout where this
  *     button resides.
@@ -221,7 +239,7 @@ Blockly.FlyoutButton.prototype.dispose = function() {
     Blockly.unbindEvent_(this.onMouseUpWrapper_);
   }
   if (this.svgGroup_) {
-    goog.dom.removeNode(this.svgGroup_);
+    Blockly.utils.removeNode(this.svgGroup_);
     this.svgGroup_ = null;
   }
   this.workspace_ = null;

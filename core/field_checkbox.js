@@ -27,6 +27,7 @@
 goog.provide('Blockly.FieldCheckbox');
 
 goog.require('Blockly.Field');
+goog.require('Blockly.utils');
 
 
 /**
@@ -45,6 +46,17 @@ Blockly.FieldCheckbox = function(state, opt_validator) {
   this.setValue(state);
 };
 goog.inherits(Blockly.FieldCheckbox, Blockly.Field);
+
+/**
+ * Construct a FieldCheckbox from a JSON arg object.
+ * @param {!Object} options A JSON object with options (checked).
+ * @returns {!Blockly.FieldCheckbox} The new field instance.
+ * @package
+ * @nocollapse
+ */
+Blockly.FieldCheckbox.fromJson = function(options) {
+  return new Blockly.FieldCheckbox(options['checked'] ? 'TRUE' : 'FALSE');
+};
 
 /**
  * Character for the checkmark.
@@ -117,3 +129,5 @@ Blockly.FieldCheckbox.prototype.showEditor_ = function() {
     this.setValue(String(newState).toUpperCase());
   }
 };
+
+Blockly.Field.register('field_checkbox', Blockly.FieldCheckbox);

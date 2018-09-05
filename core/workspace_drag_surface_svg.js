@@ -32,9 +32,6 @@ goog.provide('Blockly.WorkspaceDragSurfaceSvg');
 
 goog.require('Blockly.utils');
 
-goog.require('goog.asserts');
-goog.require('goog.math.Coordinate');
-
 
 /**
  * Blocks are moved into this SVG during a drag, improving performance.
@@ -88,13 +85,14 @@ Blockly.WorkspaceDragSurfaceSvg.prototype.createDom = function() {
   *   <g class="blocklyBubbleCanvas">/g>
   * </svg>
   */
-  this.SVG_ = Blockly.utils.createSvgElement('svg', {
-    'xmlns': Blockly.SVG_NS,
-    'xmlns:html': Blockly.HTML_NS,
-    'xmlns:xlink': 'http://www.w3.org/1999/xlink',
-    'version': '1.1',
-    'class': 'blocklyWsDragSurface blocklyOverflowVisible',
-  }, null);
+  this.SVG_ = Blockly.utils.createSvgElement('svg',
+      {
+        'xmlns': Blockly.SVG_NS,
+        'xmlns:html': Blockly.HTML_NS,
+        'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+        'version': '1.1',
+        'class': 'blocklyWsDragSurface blocklyOverflowVisible'
+      }, null);
   this.container_.appendChild(this.SVG_);
 };
 
@@ -110,12 +108,12 @@ Blockly.WorkspaceDragSurfaceSvg.prototype.createDom = function() {
 Blockly.WorkspaceDragSurfaceSvg.prototype.translateSurface = function(x, y) {
   // This is a work-around to prevent a the blocks from rendering
   // fuzzy while they are being moved on the drag surface.
-  x = x.toFixed(0);
-  y = y.toFixed(0);
+  var fixedX = x.toFixed(0);
+  var fixedY = y.toFixed(0);
 
   this.SVG_.style.display = 'block';
-  Blockly.utils.setCssTransform(this.SVG_,
-    'translate3d(' + x + 'px, ' + y + 'px, 0px)');
+  Blockly.utils.setCssTransform(
+      this.SVG_, 'translate3d(' + fixedX + 'px, ' + fixedY + 'px, 0px)');
 };
 
 /**
@@ -131,33 +129,39 @@ Blockly.WorkspaceDragSurfaceSvg.prototype.getSurfaceTranslation = function() {
 /**
  * Move the blockCanvas and bubbleCanvas out of the surface SVG and on to
  * newSurface.
- * @param {!SVGElement} newSurface The element to put the drag surface contents
+ * @param {SVGElement} newSurface The element to put the drag surface contents
  *     into.
  * @package
  */
 Blockly.WorkspaceDragSurfaceSvg.prototype.clearAndHide = function(newSurface) {
+  if (!newSurface) {
+    throw Error('Couldn\'t clear and hide the drag surface: missing ' +
+        'new surface.');
+  }
   var blockCanvas = this.SVG_.childNodes[0];
   var bubbleCanvas = this.SVG_.childNodes[1];
   if (!blockCanvas || !bubbleCanvas ||
       !Blockly.utils.hasClass(blockCanvas, 'blocklyBlockCanvas') ||
       !Blockly.utils.hasClass(bubbleCanvas, 'blocklyBubbleCanvas')) {
-    throw 'Couldn\'t clear and hide the drag surface.  A node was missing.';
+    throw Error('Couldn\'t clear and hide the drag surface. ' +
+        'A node was missing.');
   }
 
   // If there is a previous sibling, put the blockCanvas back right afterwards,
   // otherwise insert it as the first child node in newSurface.
   if (this.previousSibling_ != null) {
-    Blockly.utils.insertAfter_(blockCanvas, this.previousSibling_);
+    Blockly.utils.insertAfter(blockCanvas, this.previousSibling_);
   } else {
     newSurface.insertBefore(blockCanvas, newSurface.firstChild);
   }
 
   // Reattach the bubble canvas after the blockCanvas.
-  Blockly.utils.insertAfter_(bubbleCanvas, blockCanvas);
+  Blockly.utils.insertAfter(bubbleCanvas, blockCanvas);
   // Hide the drag surface.
   this.SVG_.style.display = 'none';
-  goog.asserts.assert(this.SVG_.childNodes.length == 0,
-    'Drag surface was not cleared.');
+  if (this.SVG_.childNodes.length) {
+    throw Error('Drag surface was not cleared.');
+  }
   Blockly.utils.setCssTransform(this.SVG_, '');
   this.previousSibling_ = null;
 };
@@ -168,21 +172,22 @@ Blockly.WorkspaceDragSurfaceSvg.prototype.clearAndHide = function(newSurface) {
  * @param {!Element} blockCanvas The block canvas <g> element from the workspace.
  * @param {!Element} bubbleCanvas The <g> element that contains the bubbles.
  * @param {?Element} previousSibling The element to insert the block canvas &
-       bubble canvas after when it goes back in the dom at the end of a drag.
- * @param {number} width The width of the workspace svg element.
- * @param {number} height The height of the workspace svg element.
+       bubble canvas after when it goes back in the DOM at the end of a drag.
+ * @param {number} width The width of the workspace SVG element.
+ * @param {number} height The height of the workspace SVG element.
  * @param {number} scale The scale of the workspace being dragged.
  * @package
  */
 Blockly.WorkspaceDragSurfaceSvg.prototype.setContentsAndShow = function(
     blockCanvas, bubbleCanvas, previousSibling, width, height, scale) {
-  goog.asserts.assert(this.SVG_.childNodes.length == 0,
-    'Already dragging a block.');
+  if (this.SVG_.childNodes.length) {
+    throw Error('Already dragging a block.');
+  }
   this.previousSibling_ = previousSibling;
   // Make sure the blocks and bubble canvas are scaled appropriately.
   blockCanvas.setAttribute('transform', 'translate(0, 0) scale(' + scale + ')');
-  bubbleCanvas.setAttribute('transform',
-    'translate(0, 0) scale(' + scale + ')');
+  bubbleCanvas.setAttribute(
+      'transform', 'translate(0, 0) scale(' + scale + ')');
   this.SVG_.setAttribute('width', width);
   this.SVG_.setAttribute('height', height);
   this.SVG_.appendChild(blockCanvas);

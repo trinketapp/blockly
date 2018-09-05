@@ -27,7 +27,8 @@
 goog.provide('Blockly.FieldAngle');
 
 goog.require('Blockly.FieldTextInput');
-goog.require('goog.math');
+goog.require('Blockly.utils');
+
 goog.require('goog.userAgent');
 
 
@@ -52,6 +53,17 @@ Blockly.FieldAngle = function(opt_value, opt_validator) {
       this, opt_value, opt_validator);
 };
 goog.inherits(Blockly.FieldAngle, Blockly.FieldTextInput);
+
+/**
+ * Construct a FieldAngle from a JSON arg object.
+ * @param {!Object} options A JSON object with options (angle).
+ * @returns {!Blockly.FieldAngle} The new field instance.
+ * @package
+ * @nocollapse
+ */
+Blockly.FieldAngle.fromJson = function(options) {
+  return new Blockly.FieldAngle(options['angle']);
+};
 
 /**
  * Round angles to the nearest 15 degrees when using mouse.
@@ -112,13 +124,13 @@ Blockly.FieldAngle.prototype.render_ = function() {
 
   // Update textElement.
   this.textElement_.textContent = this.getDisplayText_();
-  
+
   // Insert degree symbol.
   if (this.sourceBlock_.RTL) {
-     this.textElement_.insertBefore(this.symbol_, this.textElement_.firstChild);
-   } else {
-     this.textElement_.appendChild(this.symbol_);
-   }
+    this.textElement_.insertBefore(this.symbol_, this.textElement_.firstChild);
+  } else {
+    this.textElement_.appendChild(this.symbol_);
+  }
   this.updateWidth();
 };
 
@@ -174,11 +186,11 @@ Blockly.FieldAngle.prototype.showEditor_ = function() {
   }, svg);
   this.gauge_ = Blockly.utils.createSvgElement('path',
       {'class': 'blocklyAngleGauge'}, svg);
-  this.line_ = Blockly.utils.createSvgElement('line',{
-      'x1': Blockly.FieldAngle.HALF,
-      'y1': Blockly.FieldAngle.HALF,
-      'class': 'blocklyAngleLine',
-     }, svg);
+  this.line_ = Blockly.utils.createSvgElement('line', {
+    'x1': Blockly.FieldAngle.HALF,
+    'y1': Blockly.FieldAngle.HALF,
+    'class': 'blocklyAngleLine'
+  }, svg);
   // Draw markers around the edge.
   for (var angle = 0; angle < 360; angle += 15) {
     Blockly.utils.createSvgElement('line', {
@@ -203,8 +215,7 @@ Blockly.FieldAngle.prototype.showEditor_ = function() {
   this.moveWrapper1_ =
       Blockly.bindEvent_(circle, 'mousemove', this, this.onMouseMove);
   this.moveWrapper2_ =
-      Blockly.bindEvent_(this.gauge_, 'mousemove', this,
-      this.onMouseMove);
+      Blockly.bindEvent_(this.gauge_, 'mousemove', this, this.onMouseMove);
   this.updateGraph_();
 };
 
@@ -221,7 +232,7 @@ Blockly.FieldAngle.prototype.onMouseMove = function(e) {
     // This shouldn't happen, but let's not let this error propagate further.
     return;
   }
-  angle = goog.math.toDegrees(angle);
+  angle = Blockly.utils.toDegrees(angle);
   // 0: East, 90: North, 180: West, 270: South.
   if (dx < 0) {
     angle += 180;
@@ -268,12 +279,12 @@ Blockly.FieldAngle.prototype.updateGraph_ = function() {
     return;
   }
   var angleDegrees = Number(this.getText()) + Blockly.FieldAngle.OFFSET;
-  var angleRadians = goog.math.toRadians(angleDegrees);
+  var angleRadians = Blockly.utils.toRadians(angleDegrees);
   var path = ['M ', Blockly.FieldAngle.HALF, ',', Blockly.FieldAngle.HALF];
   var x2 = Blockly.FieldAngle.HALF;
   var y2 = Blockly.FieldAngle.HALF;
   if (!isNaN(angleRadians)) {
-    var angle1 = goog.math.toRadians(Blockly.FieldAngle.OFFSET);
+    var angle1 = Blockly.utils.toRadians(Blockly.FieldAngle.OFFSET);
     var x1 = Math.cos(angle1) * Blockly.FieldAngle.RADIUS;
     var y1 = Math.sin(angle1) * -Blockly.FieldAngle.RADIUS;
     if (Blockly.FieldAngle.CLOCKWISE) {
@@ -318,3 +329,5 @@ Blockly.FieldAngle.prototype.classValidator = function(text) {
   }
   return String(n);
 };
+
+Blockly.Field.register('field_angle', Blockly.FieldAngle);
